@@ -1,0 +1,1 @@
+export { LatestNewsCard } from "./LatestNewsCard";
