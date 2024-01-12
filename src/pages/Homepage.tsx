@@ -12,7 +12,7 @@ function HomePage() {
   return (
     <div>
       <Navbar />
-      <div className="homepage">
+      <div className="page-wrapper-1">
         <HomepageHeader />
         <LiveChatCTA />
         <LatestNewsCard />

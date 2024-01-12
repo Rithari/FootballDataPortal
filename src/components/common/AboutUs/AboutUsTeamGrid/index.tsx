@@ -1,0 +1,1 @@
+export { AboutUsTeamGrid } from "./AboutUsTeamGrid";

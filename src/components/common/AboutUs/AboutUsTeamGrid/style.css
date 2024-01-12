@@ -1,0 +1,163 @@
+.about-us-team-grid {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 112px 64px;
+  position: relative;
+  width: 1440px;
+}
+
+.about-us-team-grid .section-title {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  width: 768px;
+}
+
+.about-us-team-grid .subheading {
+  color: var(--black);
+  font-family: var(--text-regular-semi-bold-font-family);
+  font-size: var(--text-regular-semi-bold-font-size);
+  font-style: var(--text-regular-semi-bold-font-style);
+  font-weight: var(--text-regular-semi-bold-font-weight);
+  letter-spacing: var(--text-regular-semi-bold-letter-spacing);
+  line-height: var(--text-regular-semi-bold-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.about-us-team-grid .content {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-team-grid .heading {
+  align-self: stretch;
+  color: var(--black);
+  font-family: var(--heading-h2-font-family);
+  font-size: var(--heading-h2-font-size);
+  font-style: var(--heading-h2-font-style);
+  font-weight: var(--heading-h2-font-weight);
+  letter-spacing: var(--heading-h2-letter-spacing);
+  line-height: var(--heading-h2-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.about-us-team-grid .text-wrapper {
+  align-self: stretch;
+  color: var(--black);
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
+  position: relative;
+}
+
+.about-us-team-grid .content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 48px;
+}
+
+.about-us-team-grid .div {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 64px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-team-grid .row {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 48px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-team-grid .card {
+  width: calc(33.333% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-us-team-grid .placeholder-image {
+  height: 80px;
+  position: relative;
+  width: 80px;
+}
+
+.about-us-team-grid .content-2 {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-team-grid .title {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-team-grid .name {
+  align-self: stretch;
+  color: var(--black);
+  font-family: var(--text-large-semi-bold-font-family);
+  font-size: var(--text-large-semi-bold-font-size);
+  font-style: var(--text-large-semi-bold-font-style);
+  font-weight: var(--text-large-semi-bold-font-weight);
+  letter-spacing: var(--text-large-semi-bold-letter-spacing);
+  line-height: var(--text-large-semi-bold-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.about-us-team-grid .text {
+  align-self: stretch;
+  color: var(--black);
+  font-family: var(--text-regular-normal-font-family);
+  font-size: var(--text-regular-normal-font-size);
+  font-style: var(--text-regular-normal-font-style);
+  font-weight: var(--text-regular-normal-font-weight);
+  letter-spacing: var(--text-regular-normal-letter-spacing);
+  line-height: var(--text-regular-normal-line-height);
+  position: relative;
+}
+
+.about-us-team-grid .social-icons {
+  flex: 0 0 auto;
+  position: relative;
+}

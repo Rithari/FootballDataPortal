@@ -1,0 +1,1 @@
+export { AboutUsStats } from "./AboutUsStats";

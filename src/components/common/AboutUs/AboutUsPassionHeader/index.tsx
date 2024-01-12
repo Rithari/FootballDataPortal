@@ -1,0 +1,1 @@
+export { AboutUsPassionHeader } from "./AboutUsPassionHeader";

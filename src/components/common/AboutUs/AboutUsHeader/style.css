@@ -1,0 +1,84 @@
+.about-us-header {
+  align-items: flex-start;
+  background-color: #00000080;
+  background-image: url(./about-us-header.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 112px 64px;
+  position: relative;
+  width: 1440px;
+}
+
+.about-us-header .container {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 768px;
+}
+
+.about-us-header .section-title {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-header .tagline {
+  color: var(--white);
+  font-family: var(--text-regular-semi-bold-font-family);
+  font-size: var(--text-regular-semi-bold-font-size);
+  font-style: var(--text-regular-semi-bold-font-style);
+  font-weight: var(--text-regular-semi-bold-font-weight);
+  letter-spacing: var(--text-regular-semi-bold-letter-spacing);
+  line-height: var(--text-regular-semi-bold-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.about-us-header .content {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-header .heading {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--heading-h1-font-family);
+  font-size: var(--heading-h1-font-size);
+  font-style: var(--heading-h1-font-style);
+  font-weight: var(--heading-h1-font-weight);
+  letter-spacing: var(--heading-h1-letter-spacing);
+  line-height: var(--heading-h1-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.about-us-header .subtitle {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
+  position: relative;
+}

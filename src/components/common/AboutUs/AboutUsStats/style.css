@@ -1,0 +1,119 @@
+.about-us-stats {
+  align-items: flex-start;
+  background-color: #00000080;
+  background-image: url(./about-us-stats.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 112px 64px;
+  position: relative;
+  width: 1440px;
+}
+
+.about-us-stats .content {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 80px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-stats .column {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  position: relative;
+}
+
+.about-us-stats .subheading {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--text-regular-semi-bold-font-family);
+  font-size: var(--text-regular-semi-bold-font-size);
+  font-style: var(--text-regular-semi-bold-font-style);
+  font-weight: var(--text-regular-semi-bold-font-weight);
+  letter-spacing: var(--text-regular-semi-bold-letter-spacing);
+  line-height: var(--text-regular-semi-bold-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.about-us-stats .heading {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--heading-h2-font-family);
+  font-size: var(--heading-h2-font-size);
+  font-style: var(--heading-h2-font-style);
+  font-weight: var(--heading-h2-font-weight);
+  letter-spacing: var(--heading-h2-letter-spacing);
+  line-height: var(--heading-h2-line-height);
+  position: relative;
+}
+
+.about-us-stats .text {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.about-us-stats .stats {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 48px;
+  position: relative;
+  width: 100%;
+}
+
+.about-us-stats .stat {
+  align-items: flex-start;
+  border-color: #ffffff;
+  border-left-style: solid;
+  border-left-width: 2px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+  padding: 0px 0px 0px 32px;
+  position: relative;
+}
+
+.about-us-stats .text-wrapper {
+  align-self: stretch;
+  color: var(--white);
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 104px;
+  margin-top: -2px;
+  position: relative;
+}
+
+.about-us-stats .div {
+  align-self: stretch;
+  color: var(--white);
+  font-family: var(--heading-h6-font-family);
+  font-size: var(--heading-h6-font-size);
+  font-style: var(--heading-h6-font-style);
+  font-weight: var(--heading-h6-font-weight);
+  letter-spacing: var(--heading-h6-letter-spacing);
+  line-height: var(--heading-h6-line-height);
+  position: relative;
+}
