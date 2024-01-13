@@ -1,58 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
-import { fetchAllPlayers } from "../../../../../api/players-api";
+import { fetchAllClubs } from "../../../../../api/clubs-api";
 import "./style.css";
 
 // Mock response data
-const mockPlayers = [
+const mockClubs = [
   {
-    name: "John Doe",
-    role: "Forward",
-    age: 25,
-    club: "FC Barcelona",
-    marketValue: "$50 million",
+    clubName: "FC Barcelona",
+    coach: "Ronald Koeman",
+    stadium: "Camp Nou",
+    stadiumSeats: 99354,
+    marketValue: "$4.06 billion",
   },
   {
-    name: "Jane Smith",
-    role: "Midfielder",
-    age: 28,
-    club: "Real Madrid",
-    marketValue: "$40 million",
+    clubName: "Real Madrid",
+    coach: "Carlo Ancelotti",
+    stadium: "Santiago Bernabeu",
+    stadiumSeats: 81044,
+    marketValue: "$4.24 billion",
   },
 ];
 
-export const PlayerListTable = (): JSX.Element => {
-  const [players, setPlayers] = useState<
+export const ClubListTable = (): JSX.Element => {
+  const [clubs, setClubs] = useState<
     {
-      name: string;
-      role: string;
-      age: number;
-      club: string;
+      clubName: string;
+      coach: string;
+      stadium: string;
+      stadiumSeats: number;
       marketValue: string;
     }[]
   >([]);
 
   useEffect(() => {
     // Simulate API call with mock response data
-    setPlayers(mockPlayers);
+    setClubs(mockClubs);
   }, []);
 
   const columns = [
     {
-      name: "Name",
-      formatter: (cell: string) =>
-        _(
-          // Use the _ function to render JSX
-          <a href={`/player/${cell.replace(/\s+/g, "-").toLowerCase()}`}>
-            {cell}
-          </a>
-        ),
-    },
-    "Role",
-    "Age",
-    {
-      name: "Club",
+      name: "Club Name",
       formatter: (cell: string) =>
         _(
           // Use the _ function to render JSX
@@ -61,16 +49,19 @@ export const PlayerListTable = (): JSX.Element => {
           </a>
         ),
     },
+    "Coach",
+    "Stadium",
+    "Stadium Seats",
     "Market Value",
   ];
 
   // Transform players data into the format expected by Grid.js
-  const gridData = players.map((player) => [
-    player.name,
-    player.role,
-    player.age,
-    player.club,
-    player.marketValue,
+  const gridData = clubs.map((club) => [
+    club.clubName,
+    club.coach,
+    club.stadium,
+    club.stadiumSeats,
+    club.marketValue,
   ]);
 
   return (

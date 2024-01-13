@@ -6,7 +6,7 @@ import {
   PlayerListStats,
 } from "../../components/common/Players/PlayerList";
 
-import "../assets/styles/style.css";
+import "../../assets/styles/style.css";
 
 function Players() {
   return (
@@ -14,12 +14,7 @@ function Players() {
       <Navbar />
       <div className="page-wrapper-1">
         <PlayerListHeader />
-        <PlayerListTable
-          inputType={""}
-          inputType1={""}
-          buttonClassName={undefined}
-          buttonClassNameOverride={undefined}
-        />
+        <PlayerListTable />
         <PlayerListStats />
       </div>
       <Footer />
