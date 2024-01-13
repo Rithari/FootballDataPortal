@@ -1,18 +1,19 @@
 import React from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 export const Navbar = (): JSX.Element => {
   return (
     <div className="navbar">
       <div className="container">
-        <a className="logo" href="/">
+        <Link className="logo" to="/">
           <img alt="Website Logo" src="/logos/logo-no-background.svg" />
-        </a>
+        </Link>
         <div className="menu">
-          <a href="/games">Games</a>
-          <a href="/competitions">Competitions</a>
-          <a href="/clubs">Clubs</a>
-          <a href="/news">News</a>
+          <Link to="/games">Games</Link>
+          <Link to="/competitions">Competitions</Link>
+          <Link to="/clubs">Clubs</Link>
+          <Link to="/players">Players</Link>
         </div>
       </div>
     </div>

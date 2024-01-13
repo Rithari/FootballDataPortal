@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -13,13 +14,13 @@ export const Footer = (): JSX.Element => {
   return (
     <div className="footer">
       <div className="container">
-        <a className="logo" href="/">
+        <Link className="logo" to="/">
           <img alt="Website Logo" src="logos/logo-no-background.svg" />
-        </a>
+        </Link>
         <div className="menu">
-          <a href="/about">About Us</a>
-          <a href="/contact">Contact Us</a>
-          <a href="/news">News</a>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact Us</Link>
+          <Link to="/news">News</Link>
         </div>
         <div className="socials">
           <a href="https://facebook.com">
