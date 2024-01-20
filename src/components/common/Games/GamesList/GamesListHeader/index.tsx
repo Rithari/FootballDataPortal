@@ -1,0 +1,1 @@
+export { GamesListHeader } from "./GamesListHeader";

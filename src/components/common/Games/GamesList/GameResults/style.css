@@ -1,0 +1,256 @@
+.game-results {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 381px;
+  justify-content: center;
+  position: relative;
+}
+
+.game-results .result {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 88px;
+  justify-content: center;
+  padding: 16px 24px;
+  position: relative;
+  width: 1030px;
+}
+
+.game-results .team {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  position: relative;
+  width: 462px;
+}
+
+.game-results .div {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 15px;
+  position: relative;
+}
+
+.game-results .frame {
+  background-image: url(./frame-26.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .text-wrapper {
+  color: var(--black);
+  font-family: var(--paragraf-medium-font-family);
+  font-size: var(--paragraf-medium-font-size);
+  font-style: var(--paragraf-medium-font-style);
+  font-weight: var(--paragraf-medium-font-weight);
+  letter-spacing: var(--paragraf-medium-letter-spacing);
+  line-height: var(--paragraf-medium-line-height);
+  position: relative;
+  width: 120px;
+}
+
+.game-results .score {
+  align-items: center;
+  background-color: #5642a91a;
+  border-radius: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 6px 16px;
+  position: relative;
+  width: 64px;
+}
+
+.game-results .text-wrapper-2 {
+  color: #5642a9;
+  flex: 1;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+}
+
+.game-results .team-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 15px;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.game-results .text-wrapper-3 {
+  color: var(--black);
+  font-family: var(--paragraf-medium-font-family);
+  font-size: var(--paragraf-medium-font-size);
+  font-style: var(--paragraf-medium-font-style);
+  font-weight: var(--paragraf-medium-font-weight);
+  letter-spacing: var(--paragraf-medium-letter-spacing);
+  line-height: var(--paragraf-medium-line-height);
+  position: relative;
+  text-align: right;
+  width: 120px;
+}
+
+.game-results .frame-2 {
+  background-image: url(./frame-27.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .time {
+  align-items: center;
+  background-color: #fa0e0e1a;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 16px;
+  position: relative;
+  width: 103px;
+}
+
+.game-results .text-wrapper-4 {
+  color: #f90d0d;
+  flex: 1;
+  font-family: var(--body-medium-font-family);
+  font-size: var(--body-medium-font-size);
+  font-style: var(--body-medium-font-style);
+  font-weight: var(--body-medium-font-weight);
+  letter-spacing: var(--body-medium-letter-spacing);
+  line-height: var(--body-medium-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.game-results .status {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 40px;
+  position: relative;
+}
+
+.game-results .text-wrapper-5 {
+  color: var(--dark-gray);
+  font-family: var(--body-regular-font-family);
+  font-size: var(--body-regular-font-size);
+  font-style: var(--body-regular-font-style);
+  font-weight: var(--body-regular-font-weight);
+  letter-spacing: var(--body-regular-letter-spacing);
+  line-height: var(--body-regular-line-height);
+  position: relative;
+  width: 126px;
+}
+
+.game-results .icon {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.game-results .frame-3 {
+  background-image: url(./image.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-4 {
+  background-image: url(./frame-26-2.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-5 {
+  background-image: url(./frame-27-2.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 48px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-6 {
+  background-image: url(./frame-26-3.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .text-wrapper-6 {
+  color: var(--dark-gray);
+  font-family: var(--body-regular-font-family);
+  font-size: var(--body-regular-font-size);
+  font-style: var(--body-regular-font-style);
+  font-weight: var(--body-regular-font-weight);
+  letter-spacing: var(--body-regular-letter-spacing);
+  line-height: var(--body-regular-line-height);
+  position: relative;
+  width: 125px;
+}
+
+.game-results .frame-7 {
+  background-image: url(./frame-26-4.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-8 {
+  background-image: url(./frame-27-3.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-9 {
+  background-image: url(./frame-27-4.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 48px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-10 {
+  background-image: url(./frame-26-5.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
