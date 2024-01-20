@@ -5,7 +5,9 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import News from "./pages/news/News";
 import Players from "./pages/players/Players";
+import Player from "./pages/players/Player";
 import Clubs from "./pages/clubs/Clubs";
+import Club from "./pages/clubs/Club";
 
 const AppRouter: React.FC = () => {
   return (
@@ -14,9 +16,11 @@ const AppRouter: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about/*" element={<AboutUs />} />
         <Route path="/contact/*" element={<ContactUs />} />
-        <Route path="/news/*" element={<News />} />
+        {/*<Route path="/news/*" element={<News />} />*/}
         <Route path="/players/*" element={<Players />} />
+        <Route path="/player/*" element={<Player />} />
         <Route path="/clubs/*" element={<Clubs />} />
+        <Route path="/club/*" element={<Club />} />
       </Routes>
     </Router>
   );
