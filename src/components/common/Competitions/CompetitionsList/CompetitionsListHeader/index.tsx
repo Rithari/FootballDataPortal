@@ -1,0 +1,1 @@
+export { CompetitionsListHeader } from "./CompetitionsListHeader";

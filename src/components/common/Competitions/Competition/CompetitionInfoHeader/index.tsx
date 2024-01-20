@@ -1,0 +1,1 @@
+export { CompetitionInfoHeader } from "./CompetitionInfoHeader";

@@ -10,6 +10,8 @@ import Clubs from "./pages/clubs/Clubs";
 import Club from "./pages/clubs/Club";
 import Games from "./pages/games/Games";
 import Game from "./pages/games/Game";
+import Competitions from "./pages/competitions/Competitions";
+import Competition from "./pages/competitions/Competition";
 
 const AppRouter: React.FC = () => {
   return (
@@ -25,6 +27,7 @@ const AppRouter: React.FC = () => {
         <Route path="/club/*" element={<Club />} />
         <Route path="/games/*" element={<Games />} />
         <Route path="/game/*" element={<Game />} />
+        <Route path="/competition/*" element={<Competition />} />
       </Routes>
     </Router>
   );

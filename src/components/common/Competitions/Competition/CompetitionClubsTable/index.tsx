@@ -1,0 +1,1 @@
+export { CompetitionClubsTable } from "./CompetitionClubsTable";
