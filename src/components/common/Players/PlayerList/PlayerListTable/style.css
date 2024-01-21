@@ -46,9 +46,10 @@
 }
 
 /* Hover Effects */
-.gridjs-table tbody tr:hover {
-  background-color: #e8e8e8; /* Slightly darker for hover effect */
-  cursor: pointer;
+.gridjs-table tbody tr a:hover,
+.gridjs-table tbody tr button:hover,
+.gridjs-table tbody tr .clickable:hover {
+  cursor: pointer !important;
 }
 
 /* Pagination and Search Input - Ensuring font consistency */

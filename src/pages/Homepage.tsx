@@ -15,7 +15,6 @@ function HomePage() {
       <div className="page-wrapper-1">
         <HomepageHeader />
         <LiveChatCTA />
-        <LatestNewsCard />
         <NewsletterCTA />
       </div>
       <Footer />

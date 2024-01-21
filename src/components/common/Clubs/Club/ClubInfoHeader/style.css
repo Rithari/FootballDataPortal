@@ -20,7 +20,7 @@
 }
 
 .club-info-header .user {
-  background-image: url(./user-07b.png);
+  background-image: url(/media/club-image.png);
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 133px;

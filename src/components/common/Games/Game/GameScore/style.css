@@ -42,11 +42,12 @@
 
 .game-score .text-wrapper {
   color: var(--black);
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 29.9px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h4-font-family);
+  font-size: var(--heading-h4-font-size);
+  font-style: var(--heading-h4-font-style);
+  font-weight: var(--heading-h4-font-weight);
+  letter-spacing: var(--heading-h4-letter-spacing);
+  line-height: var(--heading-h4-line-height);
   position: relative;
   width: 156.4px;
 }
@@ -62,11 +63,12 @@
 
 .game-score .text-wrapper-2 {
   color: var(--black);
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 32.6px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h4-font-family);
+  font-size: var(--heading-h4-font-size);
+  font-style: var(--heading-h4-font-style);
+  font-weight: var(--heading-h4-font-weight);
+  letter-spacing: var(--heading-h4-letter-spacing);
+  line-height: var(--heading-h4-line-height);
   margin-top: -1.36px;
   position: relative;
   text-align: center;
@@ -75,11 +77,12 @@
 
 .game-score .text-wrapper-3 {
   color: var(--gray);
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 21.8px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h6-font-family);
+  font-size: var(--heading-h6-font-size);
+  font-style: var(--heading-h6-font-style);
+  font-weight: var(--heading-h6-font-weight);
+  letter-spacing: var(--heading-h6-letter-spacing);
+  line-height: var(--heading-h6-line-height);
   position: relative;
   text-align: center;
   width: 31.28px;
@@ -88,11 +91,12 @@
 .game-score .text-wrapper-4 {
   color: var(--black);
   flex: 1;
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 32.6px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h4-font-family);
+  font-size: var(--heading-h4-font-size);
+  font-style: var(--heading-h4-font-style);
+  font-weight: var(--heading-h4-font-weight);
+  letter-spacing: var(--heading-h4-letter-spacing);
+  line-height: var(--heading-h4-line-height);
   margin-top: -1.36px;
   position: relative;
   text-align: center;
@@ -100,11 +104,12 @@
 
 .game-score .text-wrapper-5 {
   color: var(--black);
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 29.9px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h4-font-family);
+  font-size: var(--heading-h4-font-size);
+  font-style: var(--heading-h4-font-style);
+  font-weight: var(--heading-h4-font-weight);
+  letter-spacing: var(--heading-h4-letter-spacing);
+  line-height: var(--heading-h4-line-height);
   position: relative;
   text-align: right;
   width: 156.4px;
@@ -145,11 +150,12 @@
 .game-score .text-wrapper-6 {
   align-self: stretch;
   color: var(--dark-gray);
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 22.8px;
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
   position: relative;
   transform: rotate(180deg);
 }
@@ -157,11 +163,12 @@
 .game-score .text-wrapper-7 {
   align-self: stretch;
   color: var(--dark-gray);
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 22.8px;
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
   position: relative;
   text-align: right;
   transform: rotate(180deg);
@@ -170,11 +177,12 @@
 .game-score .text-wrapper-8 {
   align-self: stretch;
   color: var(--dark-gray);
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 22.8px;
+  font-family: var(--text-medium-normal-font-family);
+  font-size: var(--text-medium-normal-font-size);
+  font-style: var(--text-medium-normal-font-style);
+  font-weight: var(--text-medium-normal-font-weight);
+  letter-spacing: var(--text-medium-normal-letter-spacing);
+  line-height: var(--text-medium-normal-line-height);
   margin-top: -1.36px;
   position: relative;
   text-align: right;
@@ -183,15 +191,16 @@
 
 .game-score .text-wrapper-9 {
   color: var(--black);
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 21.8px;
-  font-weight: 500;
-  height: 26px;
-  left: 643px;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--heading-h5-font-family);
+  font-size: var(--heading-h5-font-size);
+  font-style: var(--heading-h5-font-style);
+  font-weight: var(--heading-h5-font-weight);
+  height: 34px;
+  left: 639px;
+  letter-spacing: var(--heading-h5-letter-spacing);
+  line-height: var(--heading-h5-line-height);
   position: absolute;
   text-align: center;
-  top: 31px;
+  top: 27px;
   white-space: nowrap;
 }

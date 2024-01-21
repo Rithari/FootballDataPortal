@@ -47,12 +47,12 @@
 
 .game-results .text-wrapper {
   color: var(--black);
-  font-family: var(--paragraf-medium-font-family);
-  font-size: var(--paragraf-medium-font-size);
-  font-style: var(--paragraf-medium-font-style);
-  font-weight: var(--paragraf-medium-font-weight);
-  letter-spacing: var(--paragraf-medium-letter-spacing);
-  line-height: var(--paragraf-medium-line-height);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   position: relative;
   width: 120px;
 }
@@ -72,11 +72,12 @@
 .game-results .text-wrapper-2 {
   color: #5642a9;
   flex: 1;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: normal;
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   margin-top: -1px;
   position: relative;
   text-align: center;
@@ -93,12 +94,12 @@
 
 .game-results .text-wrapper-3 {
   color: var(--black);
-  font-family: var(--paragraf-medium-font-family);
-  font-size: var(--paragraf-medium-font-size);
-  font-style: var(--paragraf-medium-font-style);
-  font-weight: var(--paragraf-medium-font-weight);
-  letter-spacing: var(--paragraf-medium-letter-spacing);
-  line-height: var(--paragraf-medium-line-height);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   position: relative;
   text-align: right;
   width: 120px;
@@ -129,12 +130,12 @@
 .game-results .text-wrapper-4 {
   color: #f90d0d;
   flex: 1;
-  font-family: var(--body-medium-font-family);
-  font-size: var(--body-medium-font-size);
-  font-style: var(--body-medium-font-style);
-  font-weight: var(--body-medium-font-weight);
-  letter-spacing: var(--body-medium-letter-spacing);
-  line-height: var(--body-medium-line-height);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   margin-top: -1px;
   position: relative;
 }
@@ -149,12 +150,12 @@
 
 .game-results .text-wrapper-5 {
   color: var(--dark-gray);
-  font-family: var(--body-regular-font-family);
-  font-size: var(--body-regular-font-size);
-  font-style: var(--body-regular-font-style);
-  font-weight: var(--body-regular-font-weight);
-  letter-spacing: var(--body-regular-letter-spacing);
-  line-height: var(--body-regular-line-height);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   position: relative;
   width: 126px;
 }
@@ -205,12 +206,12 @@
 
 .game-results .text-wrapper-6 {
   color: var(--dark-gray);
-  font-family: var(--body-regular-font-family);
-  font-size: var(--body-regular-font-size);
-  font-style: var(--body-regular-font-style);
-  font-weight: var(--body-regular-font-weight);
-  letter-spacing: var(--body-regular-letter-spacing);
-  line-height: var(--body-regular-line-height);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
   position: relative;
   width: 125px;
 }
