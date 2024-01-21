@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
-import { fetchAllCompetitions } from "../../../../../api/competitions-api";
+import {
+  fetchAllCompetitions,
+  fetchCompetitionById,
+} from "../../../../../api/competitions-api";
 import "./style.css";
-
-// mock response data
-const mockCompetitions = [
-  {
-    competition: "La Liga",
-    country: "Spain",
-    clubs: 20,
-    players: 500,
-    totalValue: "$10 billion",
-  },
-  {
-    competition: "Premier League",
-    country: "England",
-    clubs: 20,
-    players: 50,
-    totalValue: "$0",
-  },
-];
-
-// Needs comeptition, country, clubs, players, total value
 
 export const CompetitionsListTable = (): JSX.Element => {
   const [competitions, setCompetitions] = useState<
     {
+      competitionId: string;
       competition: string;
       country: string;
       clubs: number;
@@ -35,9 +19,30 @@ export const CompetitionsListTable = (): JSX.Element => {
     }[]
   >([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    // Simulate API call with mock response data
-    setCompetitions(mockCompetitions);
+    const getCompetitions = async () => {
+      setIsLoading(true);
+      try {
+        const competitionsData = await fetchAllCompetitions();
+        const transformedData = competitionsData.map((competition: any) => ({
+          competitionId: competition.competition.competitionId,
+          competition: competition.competition.name,
+          country: competition.competition.countryName,
+          clubs: competition.clubCount,
+          players: competition.totalNumberOfPlayers,
+          //totalValue: competition.totalValue,
+        }));
+        setCompetitions(transformedData);
+      } catch (error) {
+        console.error("Failed to fetch competitions:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getCompetitions();
   }, []);
 
   const columns = [

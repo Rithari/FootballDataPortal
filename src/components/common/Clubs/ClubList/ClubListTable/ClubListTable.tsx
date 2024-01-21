@@ -4,38 +4,42 @@ import "gridjs/dist/theme/mermaid.css";
 import { fetchAllClubs } from "../../../../../api/clubs-api";
 import "./style.css";
 
-// Mock response data
-const mockClubs = [
-  {
-    clubName: "FC Barcelona",
-    coach: "Ronald Koeman",
-    stadium: "Camp Nou",
-    stadiumSeats: 99354,
-    marketValue: "$4.06 billion",
-  },
-  {
-    clubName: "Real Madrid",
-    coach: "Carlo Ancelotti",
-    stadium: "Santiago Bernabeu",
-    stadiumSeats: 81044,
-    marketValue: "$4.24 billion",
-  },
-];
-
 export const ClubListTable = (): JSX.Element => {
   const [clubs, setClubs] = useState<
     {
+      clubId: number;
       clubName: string;
-      coach: string;
+      averageAge: number;
       stadium: string;
       stadiumSeats: number;
-      marketValue: string;
+      squadSize: number;
     }[]
   >([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    // Simulate API call with mock response data
-    setClubs(mockClubs);
+    const getClubs = async () => {
+      setIsLoading(true);
+      try {
+        const clubsData = await fetchAllClubs();
+        const transformedData = clubsData.map((club: any) => ({
+          clubId: club.clubId,
+          clubName: club.name,
+          averageAge: club.averageAge,
+          stadium: club.stadiumName,
+          stadiumSeats: club.stadiumSeats,
+          squadSize: club.squadSize,
+        }));
+        setClubs(transformedData);
+      } catch (error) {
+        console.error("Failed to fetch clubs:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getClubs();
   }, []);
 
   const columns = [
@@ -49,19 +53,19 @@ export const ClubListTable = (): JSX.Element => {
           </a>
         ),
     },
-    "Coach",
+    "Squad Size",
+    "Average Age",
     "Stadium",
     "Stadium Seats",
-    "Market Value",
   ];
 
   // Transform players data into the format expected by Grid.js
   const gridData = clubs.map((club) => [
     club.clubName,
-    club.coach,
+    club.squadSize,
+    club.averageAge,
     club.stadium,
     club.stadiumSeats,
-    club.marketValue,
   ]);
 
   return (
