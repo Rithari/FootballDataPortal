@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchAllClubs = async () => {
   try {
-    const response = await axios.get("http://localhost:3001/clubs");
+    const response = await axios.get("http://localhost:3000/api/clubs");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -11,7 +11,7 @@ const fetchAllClubs = async () => {
 
 const fetchClubById = async (id: string) => {
   try {
-    const response = await axios.get(`http://localhost:3001/clubs/${id}`);
+    const response = await axios.get(`http://localhost:3000/api/clubs/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
