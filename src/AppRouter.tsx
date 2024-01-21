@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import socketIO from "socket.io-client";
 import HomePage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
@@ -12,6 +13,10 @@ import Games from "./pages/games/Games";
 import Game from "./pages/games/Game";
 import Competitions from "./pages/competitions/Competitions";
 import Competition from "./pages/competitions/Competition";
+import ChatPage from "./components/chat/chat_components/ChatPage";
+import Home from "./components/chat/chat_components/Home";
+
+const socket = socketIO("http://localhost:4000");
 
 const AppRouter: React.FC = () => {
   return (
@@ -28,6 +33,9 @@ const AppRouter: React.FC = () => {
         <Route path="/games/*" element={<Games />} />
         <Route path="/game/*" element={<Game />} />
         <Route path="/competition/*" element={<Competition />} />
+        <Route path="/competitions/*" element={<Competitions />} />
+        <Route path="/chat/login" element={<Home socket={socket} />} />
+        <Route path="/chat/room" element={<ChatPage socket={socket} />} />
       </Routes>
     </Router>
   );
