@@ -16,7 +16,7 @@ import Competition from "./pages/competitions/Competition";
 import ChatPage from "./components/chat/chat_components/ChatPage";
 import Home from "./components/chat/chat_components/Home";
 
-const socket = socketIO("http://localhost:4000");
+const socket = socketIO("http://localhost:3000");
 
 const AppRouter: React.FC = () => {
   return (
