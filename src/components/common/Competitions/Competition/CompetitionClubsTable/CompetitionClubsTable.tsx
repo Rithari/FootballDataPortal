@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
-import { fetchAllCompetitionClubs } from "../../../../../api/competitions-api";
+import { fetchCompetitionById } from "../../../../../api/competitions-api";
 import "./style.css";
 
 // Mock response data

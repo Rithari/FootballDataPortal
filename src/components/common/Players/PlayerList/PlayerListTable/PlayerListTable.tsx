@@ -28,6 +28,16 @@ export const PlayerListTable = (): JSX.Element => {
     return age;
   };
 
+  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
+    // Check if the cell data is an array (for name and club columns)
+    if (Array.isArray(cell)) {
+      // Return the name part for searching (second element of the array)
+      return cell[1];
+    }
+    // For other columns, return the cell data as is
+    return cell;
+  };
+
   useEffect(() => {
     const getPlayers = async () => {
       setIsLoading(true);
@@ -93,7 +103,7 @@ export const PlayerListTable = (): JSX.Element => {
       <Grid
         data={gridData}
         columns={columns}
-        search={true}
+        search={{ enabled: true, selector: searchSelector }}
         pagination={{
           limit: 10,
         }}
