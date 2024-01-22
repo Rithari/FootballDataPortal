@@ -1,75 +1,94 @@
 import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
+import { useParams } from "react-router-dom";
 import "gridjs/dist/theme/mermaid.css";
-import { fetchCompetitionById } from "../../../../../api/competitions-api";
+import { fetchClubByCompetition } from "../../../../../api/clubs-api";
 import "./style.css";
-
-// Mock response data
-const mockClubs = [
-  {
-    clubName: "FC Barcelona",
-    coach: "Ronald Koeman",
-    stadium: "Camp Nou",
-    stadiumSeats: 99354,
-    marketValue: "$4.06 billion",
-  },
-  {
-    clubName: "Real Madrid",
-    coach: "Carlo Ancelotti",
-    stadium: "Santiago Bernabeu",
-    stadiumSeats: 81044,
-    marketValue: "$4.24 billion",
-  },
-];
 
 export const CompetitionClubsTable = (): JSX.Element => {
   const [clubs, setClubs] = useState<
     {
+      clubId: number;
       clubName: string;
-      coach: string;
+      averageAge: number;
       stadium: string;
       stadiumSeats: number;
-      marketValue: string;
+      squadSize: number;
     }[]
   >([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { id: competitionId } = useParams();
+
   useEffect(() => {
-    // Simulate API call with mock response data
-    setClubs(mockClubs);
-  }, []);
+    const getClubs = async () => {
+      setIsLoading(true);
+      try {
+        const clubsData = await fetchClubByCompetition(competitionId || "");
+        const transformedData = clubsData.map((club: any) => ({
+          clubId: club.clubId,
+          clubName: [club.clubId, club.name],
+          averageAge: club.averageAge,
+          stadium: club.stadiumName,
+          stadiumSeats: club.stadiumSeats,
+          squadSize: club.squadSize,
+        }));
+        setClubs(transformedData);
+      } catch (error) {
+        console.error("Failed to fetch clubs:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getClubs();
+  }, [competitionId]);
+
+  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
+    // Check if the cell data is an array, and the column is either Competition or Club Name
+    if (
+      Array.isArray(cell) &&
+      cellIndex === 0 /* assuming the first column is for names */
+    ) {
+      // Return the name part (second element of the array) for searching
+      return cell[1];
+    }
+    // For other columns, return the cell data as is
+    return cell;
+  };
 
   const columns = [
     {
       name: "Club Name",
-      formatter: (cell: string) =>
-        _(
-          // Use the _ function to render JSX
-          <a href={`/club/${cell.replace(/\s+/g, "-").toLowerCase()}`}>
-            {cell}
-          </a>
-        ),
+      formatter: (cell: [number, string]) =>
+        _(<a href={`/club/${cell[0]}`}>{cell[1]}</a>),
     },
-    "Coach",
+    "Squad Size",
+    "Average Age",
     "Stadium",
     "Stadium Seats",
-    "Market Value",
   ];
 
   // Transform players data into the format expected by Grid.js
   const gridData = clubs.map((club) => [
     club.clubName,
-    club.coach,
+    club.squadSize,
+    club.averageAge,
     club.stadium,
     club.stadiumSeats,
-    club.marketValue,
   ]);
+
+  if (isLoading) {
+    return <div className="loading-text">Loading Clubs...</div>;
+  }
 
   return (
     <div className="gridjs-container">
       <Grid
         data={gridData}
         columns={columns}
-        search={true}
+        search={{ enabled: true, selector: searchSelector }}
         pagination={{
           limit: 10, // You can adjust the limit as needed
         }}

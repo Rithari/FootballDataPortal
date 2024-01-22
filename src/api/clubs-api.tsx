@@ -18,4 +18,15 @@ const fetchClubById = async (id: string) => {
   }
 };
 
-export { fetchAllClubs, fetchClubById };
+const fetchClubByCompetition = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/api/clubs/competition/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { fetchAllClubs, fetchClubById, fetchClubByCompetition };
