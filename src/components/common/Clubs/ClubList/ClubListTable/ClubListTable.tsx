@@ -25,7 +25,7 @@ export const ClubListTable = (): JSX.Element => {
         const clubsData = await fetchAllClubs();
         const transformedData = clubsData.map((club: any) => ({
           clubId: club.clubId,
-          clubName: club.name,
+          clubName: [club.clubId, club.name],
           averageAge: club.averageAge,
           stadium: club.stadiumName,
           stadiumSeats: club.stadiumSeats,
@@ -43,9 +43,12 @@ export const ClubListTable = (): JSX.Element => {
   }, []);
 
   const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
-    // Check if the cell data is an array (for name and club columns)
-    if (Array.isArray(cell)) {
-      // Return the name part for searching (second element of the array)
+    // Check if the cell data is an array, and the column is either Competition or Club Name
+    if (
+      Array.isArray(cell) &&
+      cellIndex === 0 /* assuming the first column is for names */
+    ) {
+      // Return the name part (second element of the array) for searching
       return cell[1];
     }
     // For other columns, return the cell data as is
@@ -55,13 +58,8 @@ export const ClubListTable = (): JSX.Element => {
   const columns = [
     {
       name: "Club Name",
-      formatter: (cell: string) =>
-        _(
-          // Use the _ function to render JSX
-          <a href={`/club/${cell.replace(/\s+/g, "-").toLowerCase()}`}>
-            {cell}
-          </a>
-        ),
+      formatter: (cell: [number, string]) =>
+        _(<a href={`/club/${cell[0]}`}>{cell[1]}</a>),
     },
     "Squad Size",
     "Average Age",
