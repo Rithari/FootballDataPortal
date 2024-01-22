@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
-import {
-  fetchAllCompetitions,
-  fetchCompetitionById,
-} from "../../../../../api/competitions-api";
+import { fetchAllCompetitions } from "../../../../../api/competitions-api";
 import "./style.css";
 
 export const CompetitionsListTable = (): JSX.Element => {
@@ -18,6 +15,16 @@ export const CompetitionsListTable = (): JSX.Element => {
       totalValue: string;
     }[]
   >([]);
+
+  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
+    // Check if the cell data is an array (for name and club columns)
+    if (Array.isArray(cell)) {
+      // Return the name part for searching (second element of the array)
+      return cell[1];
+    }
+    // For other columns, return the cell data as is
+    return cell;
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,12 +78,16 @@ export const CompetitionsListTable = (): JSX.Element => {
     competition.totalValue,
   ]);
 
+  if (isLoading) {
+    return <div className="loading-text">Loading competitions...</div>;
+  }
+
   return (
     <div className="gridjs-container">
       <Grid
         data={gridData}
         columns={columns}
-        search={true}
+        search={{ enabled: true, selector: searchSelector }}
         pagination={{
           limit: 10, // You can adjust the limit as needed
         }}

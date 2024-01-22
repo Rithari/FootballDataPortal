@@ -42,6 +42,16 @@ export const ClubListTable = (): JSX.Element => {
     getClubs();
   }, []);
 
+  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
+    // Check if the cell data is an array (for name and club columns)
+    if (Array.isArray(cell)) {
+      // Return the name part for searching (second element of the array)
+      return cell[1];
+    }
+    // For other columns, return the cell data as is
+    return cell;
+  };
+
   const columns = [
     {
       name: "Club Name",
@@ -68,12 +78,16 @@ export const ClubListTable = (): JSX.Element => {
     club.stadiumSeats,
   ]);
 
+  if (isLoading) {
+    return <div className="loading-text">Loading Clubs...</div>;
+  }
+
   return (
     <div className="gridjs-container">
       <Grid
         data={gridData}
         columns={columns}
-        search={true}
+        search={{ enabled: true, selector: searchSelector }}
         pagination={{
           limit: 10, // You can adjust the limit as needed
         }}

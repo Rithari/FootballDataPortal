@@ -95,7 +95,7 @@ export const PlayerListTable = (): JSX.Element => {
   ]);
 
   if (isLoading) {
-    return <div>Loading players...</div>; // Or a spinner/loader component
+    return <div className="loading-text">Loading players...</div>; // Or a spinner/loader component
   }
 
   return (

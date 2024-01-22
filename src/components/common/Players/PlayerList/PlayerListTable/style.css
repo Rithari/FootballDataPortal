@@ -1,3 +1,14 @@
+.loading-text {
+  /*align-self: stretch;*/
+  color: var(--black);
+  font-family: var(--text-large-semi-bold-font-family);
+  font-size: var(--text-large-semi-bold-font-size);
+  font-style: var(--text-large-semi-bold-font-style);
+  font-weight: var(--text-large-semi-bold-font-weight);
+  letter-spacing: var(--text-large-semi-bold-letter-spacing);
+  line-height: var(--text-large-semi-bold-line-height);
+}
+
 .gridjs-container {
   width: 80%; /* This sets the max width you want for the table, you can adjust as needed */
   margin: 0 auto; /* This centers the table */
