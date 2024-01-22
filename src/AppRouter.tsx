@@ -4,7 +4,6 @@ import socketIO from "socket.io-client";
 import HomePage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import News from "./pages/news/News";
 import Players from "./pages/players/Players";
 import Player from "./pages/players/Player";
 import Clubs from "./pages/clubs/Clubs";
@@ -27,12 +26,12 @@ const AppRouter: React.FC = () => {
         <Route path="/contact/*" element={<ContactUs />} />
         {/*<Route path="/news/*" element={<News />} />*/}
         <Route path="/players/*" element={<Players />} />
-        <Route path="/player/*" element={<Player />} />
+        <Route path="/player/:id" element={<Player />} />
         <Route path="/clubs/*" element={<Clubs />} />
-        <Route path="/club/*" element={<Club />} />
+        <Route path="/club/:id" element={<Club />} />
         <Route path="/games/*" element={<Games />} />
-        <Route path="/game/*" element={<Game />} />
-        <Route path="/competition/*" element={<Competition />} />
+        <Route path="/game/:id" element={<Game />} />
+        <Route path="/competition/:id" element={<Competition />} />
         <Route path="/competitions/*" element={<Competitions />} />
         <Route path="/chat/login" element={<Home socket={socket} />} />
         <Route path="/chat/room" element={<ChatPage socket={socket} />} />
