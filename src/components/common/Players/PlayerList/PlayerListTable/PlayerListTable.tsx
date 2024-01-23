@@ -17,17 +17,6 @@ export const PlayerListTable = (): JSX.Element => {
   >([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const calculateAge = (dateOfBirth: any) => {
-    const birthDate = new Date(dateOfBirth);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
   const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
     // Check if the cell data is an array (for name and club columns)
     if (Array.isArray(cell)) {
@@ -46,7 +35,7 @@ export const PlayerListTable = (): JSX.Element => {
         const transformedData = playersData.map((player: any) => ({
           name: [player.playerId, player.name],
           position: player.position,
-          age: calculateAge(player.dateOfBirth),
+          age: player.age,
           club: [player.currentClubId, player.currentClubName],
           marketValue: player.marketValueInEur
             ? `${player.marketValueInEur}`
