@@ -46,7 +46,7 @@ export const CompetitionsListTable = (): JSX.Element => {
           clubs: competition.clubCount,
           players: competition.totalNumberOfPlayers,
           totalMarketValue: competition.totalMarketValue
-            ? `€${competition.totalMarketValue.toLocaleString()}`
+            ? `${competition.totalMarketValue}`
             : "N/A",
         }));
         setCompetitions(transformedData);
@@ -69,7 +69,51 @@ export const CompetitionsListTable = (): JSX.Element => {
     "Country",
     "Clubs",
     "Players",
-    "Total Value",
+    {
+      name: "Total Value",
+      formatter: (cell: string) => {
+        // Handle "N/A" values
+        if (cell === "N/A") return cell;
+
+        // Convert the string to a number for formatting
+        const value = parseFloat(cell);
+        // Format the number into a more readable format
+        if (value >= 1_000_000_000) {
+          return `${(value / 1_000_000_000).toFixed(2)}B €`;
+        } else if (value >= 1_000_000) {
+          return `${(value / 1_000_000).toFixed(2)}M €`;
+        } else if (value >= 1_000) {
+          return `${(value / 1_000).toFixed(2)}K €`;
+        } else {
+          return `${value.toFixed(2)} €`;
+        }
+      },
+      sort: {
+        compare: (a: string, b: string): number => {
+          const units: Record<string, number> = { B: 1e9, M: 1e6, K: 1e3 };
+          const parseValue = (val: string): number => {
+            if (val === "N/A") return -Infinity; // Return -Infinity for "N/A" so it's sorted last
+            let numericValue: number = parseFloat(val.replace(/[^\d.-]/g, ""));
+            Object.keys(units).forEach((unit: string) => {
+              if (val.includes(unit)) {
+                numericValue *= units[unit];
+              }
+            });
+            return Math.round(numericValue);
+          };
+
+          const numA: number = parseValue(a);
+          const numB: number = parseValue(b);
+
+          // Ensure "N/A" is always sorted last
+          if (numA === -Infinity && numB === -Infinity) return 0;
+          if (numA === -Infinity) return 1;
+          if (numB === -Infinity) return -1;
+
+          return numA - numB;
+        },
+      },
+    },
   ];
 
   // Transform players data into the format expected by Grid.js
@@ -91,6 +135,7 @@ export const CompetitionsListTable = (): JSX.Element => {
         data={gridData}
         columns={columns}
         search={{ enabled: true, selector: searchSelector }}
+        sort={true}
         pagination={{
           limit: 10, // You can adjust the limit as needed
         }}

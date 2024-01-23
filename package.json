@@ -16,24 +16,24 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/prop-types": "^15.7.11",
     "axios": "^1.6.5",
-    "gridjs": "^6.0.6",
-    "gridjs-react": "^6.0.1",
+    "gridjs": "^6.1.1",
+    "gridjs-react": "^6.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.1",
+    "react-router-dom": "^6.21.3",
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   }
 }

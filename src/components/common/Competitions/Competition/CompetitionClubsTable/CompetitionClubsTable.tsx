@@ -89,6 +89,7 @@ export const CompetitionClubsTable = (): JSX.Element => {
         data={gridData}
         columns={columns}
         search={{ enabled: true, selector: searchSelector }}
+        sort={true}
         pagination={{
           limit: 10, // You can adjust the limit as needed
         }}

@@ -49,7 +49,7 @@ export const PlayerListTable = (): JSX.Element => {
           age: calculateAge(player.dateOfBirth),
           club: [player.currentClubId, player.currentClubName],
           marketValue: player.marketValueInEur
-            ? `€${player.marketValueInEur.toLocaleString()}`
+            ? `${player.marketValueInEur}`
             : "N/A",
         }));
         setPlayers(transformedData);
@@ -82,7 +82,45 @@ export const PlayerListTable = (): JSX.Element => {
           <a href={`/club/${cell[0]}`}>{cell[1]}</a>
         ),
     },
-    "Market Value",
+    {
+      name: "Market Value",
+      formatter: (cell: string) => {
+        // Handle "N/A" values
+        if (cell === "N/A") return cell;
+
+        // Convert the string to a number for formatting
+        const value = parseFloat(cell);
+        // Format the number into a more readable format
+        if (value >= 1_000_000) {
+          return `${(value / 1_000_000).toFixed(2)}M €`;
+        } else if (value >= 1_000) {
+          return `${(value / 1_000).toFixed(2)}K €`;
+        } else {
+          return `${value.toFixed(2)} €`;
+        }
+      },
+      sort: {
+        compare: (a: string, b: string) => {
+          // Handle "N/A" as 0
+          const valueA = a === "N/A" ? 0 : parseFloat(a.replace(/[€MK]/g, ""));
+          const valueB = b === "N/A" ? 0 : parseFloat(b.replace(/[€MK]/g, ""));
+
+          // Convert 'M' and 'K' values to their numeric equivalents for comparison
+          const numA = a.includes("M")
+            ? valueA * 1_000_000
+            : a.includes("K")
+            ? valueA * 1_000
+            : valueA;
+          const numB = b.includes("M")
+            ? valueB * 1_000_000
+            : b.includes("K")
+            ? valueB * 1_000
+            : valueB;
+
+          return numA - numB;
+        },
+      },
+    },
   ];
 
   // Transform players data into the format expected by Grid.js
@@ -104,8 +142,9 @@ export const PlayerListTable = (): JSX.Element => {
         data={gridData}
         columns={columns}
         search={{ enabled: true, selector: searchSelector }}
+        sort={true}
         pagination={{
-          limit: 10,
+          limit: 25,
         }}
         className="gridjs-table"
       />
