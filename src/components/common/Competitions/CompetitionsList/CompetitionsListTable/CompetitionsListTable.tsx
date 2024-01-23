@@ -12,7 +12,7 @@ export const CompetitionsListTable = (): JSX.Element => {
       country: string;
       clubs: number;
       players: number;
-      totalValue: string;
+      totalMarketValue: string;
     }[]
   >([]);
 
@@ -45,7 +45,9 @@ export const CompetitionsListTable = (): JSX.Element => {
           country: competition.competition.countryName,
           clubs: competition.clubCount,
           players: competition.totalNumberOfPlayers,
-          //totalValue: competition.totalValue,
+          totalMarketValue: competition.totalMarketValue
+            ? `€${competition.totalMarketValue.toLocaleString()}`
+            : "N/A",
         }));
         setCompetitions(transformedData);
       } catch (error) {
@@ -76,7 +78,7 @@ export const CompetitionsListTable = (): JSX.Element => {
     competition.country,
     competition.clubs,
     competition.players,
-    competition.totalValue,
+    competition.totalMarketValue,
   ]);
 
   if (isLoading) {
