@@ -10,10 +10,10 @@ export const Navbar = (): JSX.Element => {
           <img alt="Website Logo" src="/logos/logo-no-background.svg" />
         </Link>
         <div className="menu">
-          <Link to="/games">Games</Link>
-          <Link to="/competitions">Competitions</Link>
-          <Link to="/clubs">Clubs</Link>
           <Link to="/players">Players</Link>
+          <Link to="/clubs">Clubs</Link>
+          <Link to="/competitions">Competitions</Link>
+          <Link to="/games">Games</Link>
         </div>
       </div>
     </div>
