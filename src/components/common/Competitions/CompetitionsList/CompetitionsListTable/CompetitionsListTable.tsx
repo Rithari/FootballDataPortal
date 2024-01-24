@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllCompetitions } from "../../../../../api/competitions-api";
 import "./style.css";
 
 export const CompetitionsListTable = (): JSX.Element => {
-  const [competitions, setCompetitions] = useState<
-    {
-      competitionId: string;
-      competition: string;
-      country: string;
-      clubs: number;
-      players: number;
-      totalMarketValue: string;
-    }[]
-  >([]);
-
   const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
     // Check if the cell data is an array, and the column is either Competition or Club Name
     if (
@@ -29,43 +17,33 @@ export const CompetitionsListTable = (): JSX.Element => {
     return cell;
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const getCompetitions = async () => {
-      setIsLoading(true);
+  const fetchData = () => {
+    return new Promise(async (resolve) => {
       try {
         const competitionsData = await fetchAllCompetitions();
-        const transformedData = competitionsData.map((competition: any) => ({
-          competitionId: competition.competition.competitionId,
-          competition: [
-            competition.competition.competitionId,
-            competition.competition.name,
-          ],
-          country: competition.competition.countryName,
-          clubs: competition.clubCount,
-          players: competition.totalNumberOfPlayers,
-          totalMarketValue: competition.totalMarketValue
+        const transformedData = competitionsData.map((competition: any) => [
+          _(
+            <a href={`/competition/${competition.competition.competitionId}`}>
+              {competition.competition.name}
+            </a>
+          ),
+          competition.competition.countryName,
+          competition.clubCount,
+          competition.totalNumberOfPlayers,
+          competition.totalMarketValue
             ? `${competition.totalMarketValue}`
             : "N/A",
-        }));
-        setCompetitions(transformedData);
+        ]);
+        resolve(transformedData);
       } catch (error) {
         console.error("Failed to fetch competitions:", error);
-      } finally {
-        setIsLoading(false);
+        resolve([]);
       }
-    };
-
-    getCompetitions();
-  }, []);
+    });
+  };
 
   const columns = [
-    {
-      name: "Competition",
-      formatter: (cell: [string, string]) =>
-        _(<a href={`/competition/${cell[0]}`}>{cell[1]}</a>),
-    },
+    "Competition",
     "Country",
     "Clubs",
     "Players",
@@ -116,23 +94,10 @@ export const CompetitionsListTable = (): JSX.Element => {
     },
   ];
 
-  // Transform players data into the format expected by Grid.js
-  const gridData = competitions.map((competition) => [
-    competition.competition,
-    competition.country,
-    competition.clubs,
-    competition.players,
-    competition.totalMarketValue,
-  ]);
-
-  if (isLoading) {
-    return <div className="loading-text">Loading competitions...</div>;
-  }
-
   return (
     <div className="gridjs-container">
       <Grid
-        data={gridData}
+        data={fetchData}
         columns={columns}
         search={{ enabled: true, selector: searchSelector }}
         sort={true}

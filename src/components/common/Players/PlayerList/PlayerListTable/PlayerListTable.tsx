@@ -1,76 +1,37 @@
-import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllPlayers } from "../../../../../api/players-api";
 import "./style.css";
 
 export const PlayerListTable = (): JSX.Element => {
-  const [players, setPlayers] = useState<
-    {
-      playerId: number;
-      name: string;
-      position: string;
-      age: number;
-      club: string;
-      marketValue: string;
-    }[]
-  >([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
-    // Check if the cell data is an array (for name and club columns)
-    if (Array.isArray(cell)) {
-      // Return the name part for searching (second element of the array)
-      return cell[1];
-    }
-    // For other columns, return the cell data as is
-    return cell;
-  };
-
-  useEffect(() => {
-    const getPlayers = async () => {
-      setIsLoading(true);
+  const fetchData = () => {
+    return new Promise(async (resolve) => {
       try {
         const playersData = await fetchAllPlayers();
-        const transformedData = playersData.map((player: any) => ({
-          name: [player.playerId, player.name],
-          position: player.position,
-          age: player.age,
-          club: [player.currentClubId, player.currentClubName],
-          marketValue: player.marketValueInEur
-            ? `${player.marketValueInEur}`
-            : "N/A",
-        }));
-        setPlayers(transformedData);
+        const transformedData = playersData.map((player: any) => [
+          _(<a href={`/player/${player.playerId}`}>{player.name}</a>),
+          player.position,
+          player.age,
+          _(
+            <a href={`/club/${player.currentClubId}`}>
+              {player.currentClubName}
+            </a>
+          ),
+          player.marketValueInEur ? `${player.marketValueInEur}` : "N/A",
+        ]);
+        resolve(transformedData);
       } catch (error) {
         console.error("Failed to fetch players:", error);
-      } finally {
-        setIsLoading(false);
+        resolve([]);
       }
-    };
-
-    getPlayers();
-  }, []);
+    });
+  };
 
   const columns = [
-    {
-      name: "Name",
-      formatter: (cell: [number, string]) =>
-        _(
-          // Use the _ function to render JSX
-          <a href={`/player/${cell[0]}`}>{cell[1]}</a>
-        ),
-    },
-    "Role",
+    "Name",
+    "Position",
     "Age",
-    {
-      name: "Club",
-      formatter: (cell: [number, string]) =>
-        _(
-          // Use the _ function to render JSX
-          <a href={`/club/${cell[0]}`}>{cell[1]}</a>
-        ),
-    },
+    "Club",
     {
       name: "Market Value",
       formatter: (cell: string) => {
@@ -112,25 +73,12 @@ export const PlayerListTable = (): JSX.Element => {
     },
   ];
 
-  // Transform players data into the format expected by Grid.js
-  const gridData = players.map((player) => [
-    player.name,
-    player.position,
-    player.age,
-    player.club,
-    player.marketValue,
-  ]);
-
-  if (isLoading) {
-    return <div className="loading-text">Loading players...</div>; // Or a spinner/loader component
-  }
-
   return (
     <div className="gridjs-container">
       <Grid
-        data={gridData}
+        data={fetchData}
         columns={columns}
-        search={{ enabled: true, selector: searchSelector }}
+        search={true}
         sort={true}
         pagination={{
           limit: 25,
