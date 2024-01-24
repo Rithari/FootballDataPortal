@@ -30,7 +30,8 @@ export const CompetitionInfoHeader = (): JSX.Element => {
   const [competitionStats, setCompetitionStats] = useState<{
     averageMarketValue: number;
     averageAge: number;
-    percentageForeigners: number;
+    totalForeigners: number;
+    averageForeignersPercentage: number;
   } | null>(null);
 
   useEffect(() => {
@@ -79,7 +80,8 @@ export const CompetitionInfoHeader = (): JSX.Element => {
               <div className="list-item">
                 <div className="text-wrapper">ø-Market value</div>
                 <div className="text-2">
-                  £ {competitionStats?.averageMarketValue}m
+                  {competitionStats?.averageMarketValue &&
+                    `€ ${competitionStats?.averageMarketValue}m`}
                 </div>
               </div>
             </div>
@@ -99,7 +101,9 @@ export const CompetitionInfoHeader = (): JSX.Element => {
               <div className="list-item-2">
                 <div className="text-wrapper">Foreigners</div>
                 <div className="text-2">
-                  ({competitionStats?.percentageForeigners}%)
+                  {competitionStats?.totalForeigners}
+                  {competitionStats?.averageForeignersPercentage &&
+                    ` (${competitionStats?.averageForeignersPercentage}%)`}
                 </div>
               </div>
             </div>
