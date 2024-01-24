@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, _ } from "gridjs-react";
 import { useParams } from "react-router-dom";
 import "gridjs/dist/theme/mermaid.css";
-import { fetchClubByCompetition } from "../../../../../api/clubs-api";
+import { fetchClubsByCompetition } from "../../../../../api/clubs-api";
 import "./style.css";
 
 export const CompetitionClubsTable = (): JSX.Element => {
@@ -25,7 +25,7 @@ export const CompetitionClubsTable = (): JSX.Element => {
     const getClubs = async () => {
       setIsLoading(true);
       try {
-        const clubsData = await fetchClubByCompetition(competitionId || "");
+        const clubsData = await fetchClubsByCompetition(competitionId || "");
         const transformedData = clubsData.map((club: any) => ({
           clubId: club.clubId,
           clubName: [club.clubId, club.name],
@@ -91,7 +91,7 @@ export const CompetitionClubsTable = (): JSX.Element => {
         search={{ enabled: true, selector: searchSelector }}
         sort={true}
         pagination={{
-          limit: 10, // You can adjust the limit as needed
+          limit: 10,
         }}
         className="gridjs-table"
       />
