@@ -20,7 +20,6 @@ export const Footer = (): JSX.Element => {
         <div className="menu">
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
-          <Link to="/news">News</Link>
         </div>
         <div className="socials">
           <a href="https://facebook.com">
