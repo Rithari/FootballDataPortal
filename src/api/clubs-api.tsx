@@ -18,7 +18,7 @@ const fetchClubById = async (id: string) => {
   }
 };
 
-const fetchClubByCompetition = async (id: string) => {
+const fetchClubsByCompetition = async (id: string) => {
   try {
     const response = await axios.get(
       `http://localhost:3000/api/clubs/competition/${id}`
@@ -29,4 +29,4 @@ const fetchClubByCompetition = async (id: string) => {
   }
 };
 
-export { fetchAllClubs, fetchClubById, fetchClubByCompetition };
+export { fetchAllClubs, fetchClubById, fetchClubsByCompetition };
