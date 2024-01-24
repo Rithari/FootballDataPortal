@@ -20,13 +20,14 @@
 }
 
 .league-info-header .user {
-  background-image: url(/media/player-image.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  border-radius: 21px;
-  height: 261px;
+  background-image: url(/media/club-image.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 133px;
+  height: 178px;
   position: relative;
-  width: 199px;
+  width: 177px;
 }
 
 .league-info-header .div {
