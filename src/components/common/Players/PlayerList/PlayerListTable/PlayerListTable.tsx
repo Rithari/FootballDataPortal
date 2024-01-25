@@ -2,21 +2,22 @@ import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllPlayers } from "../../../../../api/players-api";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 export const PlayerListTable = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const fetchData = () => {
     return new Promise(async (resolve) => {
       try {
         const playersData = await fetchAllPlayers();
         const transformedData = playersData.map((player: any) => [
-          _(<a href={`/player/${player.playerId}`}>{player.name}</a>),
+          player.playerId,
+          player.currentClubId,
+          player.name,
           player.position,
           player.age,
-          _(
-            <a href={`/club/${player.currentClubId}`}>
-              {player.currentClubName}
-            </a>
-          ),
+          player.currentClubName,
           player.marketValueInEur ? `${player.marketValueInEur}` : "N/A",
         ]);
         resolve(transformedData);
@@ -28,10 +29,50 @@ export const PlayerListTable = (): JSX.Element => {
   };
 
   const columns = [
-    "Name",
+    {
+      name: "playerId",
+      hidden: true,
+    },
+    {
+      name: "currentClubId",
+      hidden: true,
+    },
+    {
+      name: "Name",
+      formatter: (cell: string, row: any) => {
+        const playerId = row.cells[0].data;
+        return _(
+          <a
+            href={`/player/${playerId}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/player/${playerId}`);
+            }}
+          >
+            {cell}
+          </a>
+        );
+      },
+    },
     "Position",
     "Age",
-    "Club",
+    {
+      name: "Club",
+      formatter: (cell: string, row: any) => {
+        const clubId = row.cells[1].data;
+        return _(
+          <a
+            href={`/club/${clubId}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/club/${clubId}`);
+            }}
+          >
+            {cell}
+          </a>
+        );
+      },
+    },
     {
       name: "Market Value",
       formatter: (cell: string) => {
@@ -81,7 +122,7 @@ export const PlayerListTable = (): JSX.Element => {
         search={true}
         sort={true}
         pagination={{
-          limit: 25,
+          limit: 15,
         }}
         className="gridjs-table"
       />

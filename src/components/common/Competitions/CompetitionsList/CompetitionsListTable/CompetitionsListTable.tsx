@@ -2,31 +2,18 @@ import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllCompetitions } from "../../../../../api/competitions-api";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 export const CompetitionsListTable = (): JSX.Element => {
-  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
-    // Check if the cell data is an array, and the column is either Competition or Club Name
-    if (
-      Array.isArray(cell) &&
-      cellIndex === 0 /* assuming the first column is for names */
-    ) {
-      // Return the name part (second element of the array) for searching
-      return cell[1];
-    }
-    // For other columns, return the cell data as is
-    return cell;
-  };
+  const navigate = useNavigate();
 
   const fetchData = () => {
     return new Promise(async (resolve) => {
       try {
         const competitionsData = await fetchAllCompetitions();
         const transformedData = competitionsData.map((competition: any) => [
-          _(
-            <a href={`/competition/${competition.competition.competitionId}`}>
-              {competition.competition.name}
-            </a>
-          ),
+          competition.competition.competitionId,
+          competition.competition.name,
           competition.competition.countryName,
           competition.clubCount,
           competition.totalNumberOfPlayers,
@@ -43,7 +30,27 @@ export const CompetitionsListTable = (): JSX.Element => {
   };
 
   const columns = [
-    "Competition",
+    {
+      name: "competitionId",
+      hidden: true,
+    },
+    {
+      name: "Competition",
+      formatter: (cell: string, row: any) => {
+        const competitionId = row.cells[0].data;
+        return _(
+          <a
+            href={`/competition/${competitionId}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/competition/${competitionId}`);
+            }}
+          >
+            {cell}
+          </a>
+        );
+      },
+    },
     "Country",
     "Clubs",
     "Players",
@@ -99,10 +106,10 @@ export const CompetitionsListTable = (): JSX.Element => {
       <Grid
         data={fetchData}
         columns={columns}
-        search={{ enabled: true, selector: searchSelector }}
+        search={true}
         sort={true}
         pagination={{
-          limit: 10, // You can adjust the limit as needed
+          limit: 10,
         }}
         className="gridjs-table"
       />

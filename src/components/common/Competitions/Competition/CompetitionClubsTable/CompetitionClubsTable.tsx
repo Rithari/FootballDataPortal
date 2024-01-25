@@ -1,31 +1,20 @@
 import { Grid, _ } from "gridjs-react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchClubsByCompetition } from "../../../../../api/clubs-api";
 import "./style.css";
 
 export const CompetitionClubsTable = (): JSX.Element => {
   const { id: competitionId } = useParams();
-
-  const searchSelector = (cell: any, rowIndex: number, cellIndex: number) => {
-    // Check if the cell data is an array, and the column is either Competition or Club Name
-    if (
-      Array.isArray(cell) &&
-      cellIndex === 0 /* assuming the first column is for names */
-    ) {
-      // Return the name part (second element of the array) for searching
-      return cell[1];
-    }
-    // For other columns, return the cell data as is
-    return cell;
-  };
+  const navigate = useNavigate();
 
   const fetchData = () => {
     return new Promise(async (resolve) => {
       try {
         const clubsData = await fetchClubsByCompetition(competitionId || "");
         const transformedData = clubsData.map((club: any) => [
-          _(<a href={`/club/${club.clubId}`}>{club.name}</a>),
+          club.clubId,
+          club.name,
           club.squadSize,
           club.averageAge,
           club.stadiumName,
@@ -40,7 +29,27 @@ export const CompetitionClubsTable = (): JSX.Element => {
   };
 
   const columns = [
-    "Club Name",
+    {
+      name: "clubId",
+      hidden: true,
+    },
+    {
+      name: "Club Name",
+      formatter: (cell: string, row: any) => {
+        const clubId = row.cells[0].data;
+        return _(
+          <a
+            href={`/club/${clubId}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/club/${clubId}`);
+            }}
+          >
+            {cell}
+          </a>
+        );
+      },
+    },
     "Squad Size",
     "Average Age",
     "Stadium",
@@ -52,7 +61,7 @@ export const CompetitionClubsTable = (): JSX.Element => {
       <Grid
         data={fetchData}
         columns={columns}
-        search={{ enabled: true, selector: searchSelector }}
+        search={true}
         sort={true}
         pagination={{
           limit: 10,
