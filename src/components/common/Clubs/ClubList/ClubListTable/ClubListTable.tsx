@@ -3,14 +3,18 @@ import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllClubs } from "../../../../../api/clubs-api";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 export const ClubListTable = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const fetchData = () => {
     return new Promise(async (resolve) => {
       try {
         const clubsData = await fetchAllClubs();
         const transformedData = clubsData.map((club: any) => [
-          _(<a href={`/club/${club.clubId}`}>{club.name}</a>),
+          club.clubId,
+          club.name,
           club.squadSize,
           club.averageAge,
           club.stadiumName,
@@ -25,7 +29,27 @@ export const ClubListTable = (): JSX.Element => {
   };
 
   const columns = [
-    "Club Name",
+    {
+      name: "clubId",
+      hidden: true,
+    },
+    {
+      name: "Club Name",
+      formatter: (cell: string, row: any) => {
+        const clubId = row.cells[0].data;
+        return _(
+          <a
+            href={`/club/${clubId}`}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/club/${clubId}`);
+            }}
+          >
+            {cell}
+          </a>
+        );
+      },
+    },
     "Squad Size",
     "Average Age",
     "Stadium",

@@ -5,7 +5,7 @@ export const PlayerListStats = (): JSX.Element => {
   return (
     <div className="player-list-stats">
       <div className="section-title">
-        <div className="heading">Statistical Graphs</div>
+        <div className="heading">Statistics</div>
         <p className="text">
           Explore player statistics and performance visually
         </p>

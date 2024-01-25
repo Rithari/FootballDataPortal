@@ -6,7 +6,7 @@ export const ClubStats = (): JSX.Element => {
     <div className="player-stats">
       <div className="content">
         <div className="div">
-          <div className="heading">Statistical Graphs</div>
+          <div className="heading">Statistics</div>
           <p className="text">
             Explore detailed graphs and statistics for clubs
           </p>
