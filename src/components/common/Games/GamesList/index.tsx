@@ -1,2 +1,2 @@
 export { GamesListHeader } from "./GamesListHeader";
-export { GameResults } from "./GameResults";
+export { GameListTable } from "./GameListTable";

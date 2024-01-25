@@ -1,3 +1,107 @@
+.gridjs-container {
+  width: 80%; /* This sets the max width you want for the table, you can adjust as needed */
+  margin: 0 auto; /* This centers the table */
+}
+
+.gridjs-table {
+  /* Basic layout and spacing */
+  width: auto; /* Allows setting max-width for centering */
+  margin: 20px auto; /* Centers the table with auto margins */
+  max-width: 1440px; /* Matches the width of your other content for consistency */
+  border-collapse: collapse;
+  box-shadow: none; /* Removes box-shadow for a flatter design */
+
+  /* Font consistency */
+  font-family: var(--text-regular-normal-font-family);
+  font-size: var(--text-regular-normal-font-size);
+}
+
+/* Header styling */
+.gridjs-table thead tr {
+  background-color: var(--black); /* Matches your header/footer color */
+  color: var(--white); /* Ensures text is readable on dark background */
+  text-align: left;
+}
+
+.gridjs-table thead th {
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--black); /* Adds a solid border for consistency */
+}
+
+/* Body styling */
+.gridjs-table tbody tr {
+  border-bottom: 1px solid var(--black); /* Consistent with the rest of the design */
+}
+
+.gridjs-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3; /* For striped effect, if desired */
+}
+
+.gridjs-table tbody tr:last-of-type {
+  border-bottom: 2px solid var(--black); /* Emphasizes the last row */
+}
+
+.gridjs-table tbody td {
+  padding: 12px 15px;
+}
+
+/* Hover Effects */
+.gridjs-table tbody tr a:hover,
+.gridjs-table tbody tr button:hover,
+.gridjs-table tbody tr .clickable:hover {
+  cursor: pointer !important;
+}
+
+/* Pagination and Search Input - Ensuring font consistency */
+.gridjs-search-input,
+.gridjs-pagination-container {
+  font-family: var(--text-regular-normal-font-family) !important;
+  font-size: var(--text-regular-normal-font-size) !important;
+}
+
+/* Centering the pagination container */
+.gridjs-pagination-container {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  justify-content: center; /* Centers pagination buttons */
+}
+
+/* Pagination button styles */
+.gridjs-pagination button {
+  all: unset;
+  border: 1px solid var(--black);
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--black);
+  margin: 0 5px; /* Space between buttons */
+}
+
+.gridjs-pagination button:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+/* Style for anchor tags within the table */
+.gridjs-table a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.gridjs-table a:hover {
+  text-decoration: underline;
+}
+
+/* Ensuring that the bottom text is styled correctly */
+.gridjs-pagination,
+.gridjs-wrapper .gridjs-summary {
+  font-family: var(--text-regular-normal-font-family) !important;
+  font-size: var(--text-regular-normal-font-size) !important;
+}
+
 .game-results {
   align-items: center;
   display: flex;

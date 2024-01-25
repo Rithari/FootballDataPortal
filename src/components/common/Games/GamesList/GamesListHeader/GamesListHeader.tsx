@@ -5,9 +5,9 @@ export const GamesListHeader = (): JSX.Element => {
   return (
     <div className="player-list-header">
       <div className="content">
-        <div className="short-heading-here">Latest Games</div>
+        <div className="short-heading-here">Games</div>
         <p className="lorem-ipsum-dolor">
-          Explore previous game results and statistics
+          Explore our games with results and statistics
         </p>
       </div>
     </div>
