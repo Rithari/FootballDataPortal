@@ -58,27 +58,33 @@ export const PlayerInfoHeader = (): JSX.Element => {
         <div className="div">
           <div className="column">
             <div className="heading">{player.name}</div>
-            <div className="text">€ {player.marketValueInEur} Valuation</div>
-            <div className="text">Plays at {player.currentClubName}</div>
+            <div className="text">
+              {player.marketValueInEur &&
+                `€ ${player.marketValueInEur} Market Value`}
+            </div>
+            <div className="text">{player.currentClubName}</div>
           </div>
           <div className="list">
             <div className="content-2">
               <div className="list-item">
                 <p className="text-wrapper">Date of birth</p>
                 <div className="text-2">
-                  {player.dateOfBirth} ({player.age})
+                  {player.dateOfBirth &&
+                    `${player.dateOfBirth} (${player.age})`}
                 </div>
               </div>
               <div className="list-item">
                 <div className="text-wrapper">Height</div>
-                <div className="text-2">{player.heightInCm} cm</div>
+                <div className="text-2">
+                  {player.heightInCm && `${player.heightInCm} cm`}
+                </div>
               </div>
             </div>
             <div className="content-2">
               <div className="list-item">
                 <div className="text-wrapper">Place of birth</div>
                 <div className="text-2">
-                  {player.cityOfBirth}, {player.countryOfBirth}
+                  {player.heightInCm && `${player.heightInCm} cm`}
                 </div>
               </div>
               <div className="list-item">
