@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 export const Footer = (): JSX.Element => {
+  const [reportSent, setReportSent] = useState(false);
+
+  const handleClick = () => {
+    setReportSent(true);
+    setTimeout(() => setReportSent(false), 3000);
+  };
+
   return (
     <div className="footer">
       <div className="container">
@@ -20,6 +27,12 @@ export const Footer = (): JSX.Element => {
         <div className="menu">
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
+          <span
+            onClick={handleClick}
+            className={reportSent ? "fly-text-animation" : ""}
+          >
+            Found a mistake?
+          </span>
         </div>
         <div className="socials">
           <a href="https://facebook.com">
