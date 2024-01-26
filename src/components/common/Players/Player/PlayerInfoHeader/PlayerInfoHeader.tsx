@@ -14,6 +14,7 @@ export const PlayerInfoHeader = (): JSX.Element => {
     lastSeason: number; // last_season
     dateOfBirth: string; // date_of_birth
     currentClubName: string; // current_club_name
+    currentClubId: number; // current_club_id
     countryOfBirth: string; // country_of_birth
     cityOfBirth: string; // city_of_birth
     countryOfCitizenship: string; // country_of_citizenship
@@ -62,7 +63,11 @@ export const PlayerInfoHeader = (): JSX.Element => {
               {player.marketValueInEur &&
                 `€ ${player.marketValueInEur} Market Value`}
             </div>
-            <div className="text">{player.currentClubName}</div>
+            <div className="text">
+              <a href={`/club/${player.currentClubId}`}>
+                {player.currentClubName}
+              </a>
+            </div>
           </div>
           <div className="list">
             <div className="content-2">
