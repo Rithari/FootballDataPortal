@@ -29,7 +29,7 @@ export const HomepageHeader: React.FC = () => {
       <img
         className="placeholder-image"
         alt="Placeholder"
-        src="/media/placeholderheader.png"
+        src="/media/homepage-header.png"
       />
     </div>
   );
