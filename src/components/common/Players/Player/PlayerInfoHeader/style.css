@@ -73,6 +73,15 @@
   position: relative;
 }
 
+.player-info-header .text a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.player-info-header .text a:hover {
+  text-decoration: underline;
+}
+
 .player-info-header .list {
   align-items: flex-start;
   display: flex;
