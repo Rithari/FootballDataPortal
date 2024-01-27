@@ -53,7 +53,7 @@ export const ClubInfoHeader = (): JSX.Element => {
           <div className="column">
             <div className="heading">{club.name}</div>
             <p className="text">
-              € {club.netTransferRecord} Total Market Value{" "}
+              € {club.netTransferRecord}m Transfer Record{" "}
               {/* TODO: Query all players to determine market value */}
             </p>
           </div>

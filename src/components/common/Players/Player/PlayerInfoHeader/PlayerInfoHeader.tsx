@@ -2,33 +2,37 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPlayerById } from "../../../../../api/players-api";
 import "./style.css";
-import Player from "../../../../../pages/players/Player";
 
 export const PlayerInfoHeader = (): JSX.Element => {
   const { id: playerId } = useParams();
 
   const [player, setPlayer] = useState<{
-    // field : db_field_name
-    playerId: number; // player_id
-    name: string; // name
-    lastSeason: number; // last_season
-    dateOfBirth: string; // date_of_birth
-    currentClubName: string; // current_club_name
-    currentClubId: number; // current_club_id
-    countryOfBirth: string; // country_of_birth
-    cityOfBirth: string; // city_of_birth
-    countryOfCitizenship: string; // country_of_citizenship
-    position: string; // position
-    subPosition: string; // sub_position
-    preferredFoot: string; // preferred_foot
-    heightInCm: number; // height_in_cm
-    marketValueInEur: number; // market_value_in_eur
-    highestMarketValueInEur: number; // highest_market_value_in_eur
-    agentName: string; // agent_name
-    contractExpirationDate: Date; // contract_expiration_date
-    age: number; // age
-    imageUrl: string; // profile picture | image_url
+    playerId: number;
+    name: string;
+    lastSeason: number;
+    dateOfBirth: string;
+    currentClubName: string;
+    currentClubId: number;
+    countryOfBirth: string;
+    cityOfBirth: string;
+    countryOfCitizenship: string;
+    position: string;
+    subPosition: string;
+    preferredFoot: string;
+    heightInCm: number;
+    marketValueInEur: number;
+    highestMarketValueInEur: number;
+    agentName: string;
+    contractExpirationDate: Date;
+    age: number;
+    imageUrl: string;
   } | null>(null);
+
+  // Helper function to format money values
+  const formatCurrency = (value: number, currency: string = "EUR") =>
+    new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
+      value
+    );
 
   useEffect(() => {
     const getPlayer = async () => {
@@ -42,8 +46,6 @@ export const PlayerInfoHeader = (): JSX.Element => {
 
     getPlayer();
   }, [playerId]);
-
-  console.log(player);
 
   if (!player) {
     return <div className="player-info-header">Loading...</div>;
@@ -61,7 +63,7 @@ export const PlayerInfoHeader = (): JSX.Element => {
             <div className="heading">{player.name}</div>
             <div className="text">
               {player.marketValueInEur &&
-                `€ ${player.marketValueInEur} Market Value`}
+                `${formatCurrency(player.marketValueInEur)} Market Value`}
             </div>
             <div className="text">
               <a href={`/club/${player.currentClubId}`}>
@@ -89,7 +91,8 @@ export const PlayerInfoHeader = (): JSX.Element => {
               <div className="list-item">
                 <div className="text-wrapper">Place of birth</div>
                 <div className="text-2">
-                  {player.heightInCm && `${player.heightInCm} cm`}
+                  {player.cityOfBirth && `${player.cityOfBirth}, `}
+                  {player.countryOfBirth}
                 </div>
               </div>
               <div className="list-item">

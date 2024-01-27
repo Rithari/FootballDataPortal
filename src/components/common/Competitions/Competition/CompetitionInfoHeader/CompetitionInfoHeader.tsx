@@ -9,6 +9,18 @@ import "./style.css";
 export const CompetitionInfoHeader = (): JSX.Element => {
   const { id: competitionId } = useParams();
 
+  // Helper function to format numbers with thousand separators
+  const formatNumber = (num: number) => num.toLocaleString();
+
+  // Helper function to format money values
+  const formatCurrency = (value: number, currency: string = "EUR") =>
+    new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
+      value
+    );
+
+  // Helper function to format percentage values
+  const formatPercentage = (value: number) => `${value.toFixed(2)}%`;
+
   const [competitionData, setCompetitionData] = useState<{
     competition: {
       competitionId: string;
@@ -68,20 +80,21 @@ export const CompetitionInfoHeader = (): JSX.Element => {
           <div className="column">
             <div className="heading">{competitionData.competition.name}</div>
             <p className="text">
-              € {competitionData.totalMarketValue} Total Market Value
+              {formatCurrency(competitionData.totalMarketValue)} Total Market
+              Value
             </p>
           </div>
           <div className="list">
             <div className="content-2">
               <div className="list-item">
                 <div className="text-wrapper">Teams</div>
-                <div className="text-2">{competitionData.clubCount} teams</div>
+                <div className="text-2">{competitionData.clubCount}</div>
               </div>
               <div className="list-item">
                 <div className="text-wrapper">ø-Market value</div>
                 <div className="text-2">
                   {competitionStats?.averageMarketValue &&
-                    `€ ${competitionStats?.averageMarketValue}m`}
+                    formatCurrency(competitionStats.averageMarketValue, "EUR")}
                 </div>
               </div>
             </div>
@@ -94,16 +107,21 @@ export const CompetitionInfoHeader = (): JSX.Element => {
               </div>
               <div className="list-item-2">
                 <div className="text-wrapper">ø-Age</div>
-                <div className="text-3">{competitionStats?.averageAge}</div>
+                <div className="text-3">
+                  {competitionStats?.averageAge.toFixed(2)}
+                </div>
               </div>
             </div>
             <div className="content-2">
               <div className="list-item-2">
                 <div className="text-wrapper">Foreigners</div>
                 <div className="text-2">
-                  {competitionStats?.totalForeigners}
-                  {competitionStats?.averageForeignersPercentage &&
-                    ` (${competitionStats?.averageForeignersPercentage}%)`}
+                  {competitionStats?.totalForeigners &&
+                    `${formatNumber(
+                      competitionStats.totalForeigners
+                    )} (${formatPercentage(
+                      competitionStats.averageForeignersPercentage
+                    )})`}
                 </div>
               </div>
             </div>
