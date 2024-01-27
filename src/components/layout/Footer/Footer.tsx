@@ -22,7 +22,7 @@ export const Footer = (): JSX.Element => {
     <div className="footer">
       <div className="container">
         <Link className="logo" to="/">
-          <img alt="Website Logo" src="logos/logo-no-background.svg" />
+          <img alt="Website Logo" src="/logos/logo-no-background.svg" />
         </Link>
         <div className="menu">
           <Link to="/about">About Us</Link>
