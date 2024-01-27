@@ -18,4 +18,15 @@ const fetchGamenById = async (id: string) => {
   }
 };
 
-export { fetchAllGames, fetchGamenById };
+const fetchGamesByClub = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/api/games/club/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { fetchAllGames, fetchGamenById, fetchGamesByClub };
