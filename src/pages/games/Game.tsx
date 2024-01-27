@@ -6,7 +6,68 @@ import {
   LiveEvents,
 } from "../../components/common/Games/Game/LiveEvents";
 
+import SoccerLineUp from "react-soccer-lineup";
+
 function Game() {
+  interface Player {
+    id: number;
+    name: string;
+    tShirtImgUrl: string;
+    tShirtNr: string;
+    faceImgUrl: string;
+  }
+
+  interface Team {
+    id: number;
+    name: string;
+    logoUrl: string;
+    playerPositionById: number[][];
+    players: Player[];
+  }
+
+  interface PlayerNumber {
+    number: number;
+  }
+
+  interface Squad {
+    cam: PlayerNumber[];
+    df: PlayerNumber[];
+    fw: PlayerNumber[];
+    gk: PlayerNumber;
+  }
+
+  interface TransformedTeam {
+    squad: Squad;
+  }
+
+  const transformTeam = (team: Team): TransformedTeam => {
+    const playerMap = new Map<number, Player>();
+    team.players.forEach((player) => playerMap.set(player.id, player));
+
+    const squad: Squad = {
+      cam: [],
+      df: [],
+      fw: [],
+      gk: { number: 0 },
+    };
+
+    team.playerPositionById.forEach((positionGroup, index) => {
+      positionGroup.forEach((playerId) => {
+        const player = playerMap.get(playerId);
+        if (player) {
+          const playerNumber = parseInt(player.tShirtNr, 10);
+          if (index === 0) squad.gk = { number: playerNumber };
+          else if (index === 1) squad.df.push({ number: playerNumber });
+          else if (index === 2 || index === 3)
+            squad.cam.push({ number: playerNumber });
+          else if (index === 4) squad.fw.push({ number: playerNumber });
+        }
+      });
+    });
+
+    return { squad };
+  };
+
   const homeTeam = {
     id: 1,
     name: "Home Team",
@@ -177,14 +238,6 @@ function Game() {
         faceImgUrl: "/textures/generic-face.png",
       },
     ],
-  };
-
-  const teamd = {
-    id: 1,
-    name: "Home Team",
-    logoUrl: "/textures/team1.png",
-    playerPositionById: [],
-    players: [],
   };
 
   const matchData = {
@@ -400,6 +453,9 @@ function Game() {
     console.log("Player clicked:", player);
   };
 
+  const homeTeam2 = transformTeam(homeTeam);
+  const awayTeam2 = transformTeam(awayTeam);
+
   return (
     <div>
       <Navbar />
@@ -418,6 +474,12 @@ function Game() {
             />
           ))}
         </LiveEvents>
+        <SoccerLineUp
+          size={"small"}
+          pattern={"lines"}
+          homeTeam={homeTeam2}
+          awayTeam={awayTeam2}
+        />
         <GameStats
           homePlayers={homeTeam.players}
           awayPlayers={awayTeam.players}
