@@ -1,0 +1,380 @@
+.view-button {
+  cursor: pointer; /* Indicates it's clickable */
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  text-decoration: underline; /* Underline to make it look like a hyperlink */
+  background: none; /* No background */
+  border: none; /* No border */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Adjust margin as needed */
+}
+
+.view-button:hover {
+  text-decoration: none; /* Optionally change the style on hover */
+}
+
+.gridjs-container {
+  width: 80%; /* This sets the max width you want for the table, you can adjust as needed */
+  margin: 0 auto; /* This centers the table */
+}
+
+.gridjs-table {
+  /* Basic layout and spacing */
+  width: auto; /* Allows setting max-width for centering */
+  margin: 20px auto; /* Centers the table with auto margins */
+  max-width: 1440px; /* Matches the width of your other content for consistency */
+  border-collapse: collapse;
+  box-shadow: none; /* Removes box-shadow for a flatter design */
+
+  /* Font consistency */
+  font-family: var(--text-regular-normal-font-family);
+  font-size: var(--text-regular-normal-font-size);
+}
+
+/* Header styling */
+.gridjs-table thead tr {
+  background-color: var(--black); /* Matches your header/footer color */
+  color: var(--white); /* Ensures text is readable on dark background */
+  text-align: left;
+}
+
+.gridjs-table thead th {
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--black); /* Adds a solid border for consistency */
+}
+
+/* Body styling */
+.gridjs-table tbody tr {
+  border-bottom: 1px solid var(--black); /* Consistent with the rest of the design */
+}
+
+.gridjs-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3; /* For striped effect, if desired */
+}
+
+.gridjs-table tbody tr:last-of-type {
+  border-bottom: 2px solid var(--black); /* Emphasizes the last row */
+}
+
+.gridjs-table tbody td {
+  padding: 12px 15px;
+}
+
+/* Hover Effects */
+.gridjs-table tbody tr a:hover,
+.gridjs-table tbody tr button:hover,
+.gridjs-table tbody tr .clickable:hover {
+  cursor: pointer !important;
+}
+
+/* Pagination and Search Input - Ensuring font consistency */
+.gridjs-search-input,
+.gridjs-pagination-container {
+  font-family: var(--text-regular-normal-font-family) !important;
+  font-size: var(--text-regular-normal-font-size) !important;
+}
+
+/* Centering the pagination container */
+.gridjs-pagination-container {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  justify-content: center; /* Centers pagination buttons */
+}
+
+/* Pagination button styles */
+.gridjs-pagination button {
+  all: unset;
+  border: 1px solid var(--black);
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--black);
+  margin: 0 5px; /* Space between buttons */
+}
+
+.gridjs-pagination button:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+/* Style for anchor tags within the table */
+.gridjs-table a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.gridjs-table a:hover {
+  text-decoration: underline;
+}
+
+/* Ensuring that the bottom text is styled correctly */
+.gridjs-pagination,
+.gridjs-wrapper .gridjs-summary {
+  font-family: var(--text-regular-normal-font-family) !important;
+  font-size: var(--text-regular-normal-font-size) !important;
+}
+
+.game-results {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 381px;
+  justify-content: center;
+  position: relative;
+}
+
+.game-results .result {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 88px;
+  justify-content: center;
+  padding: 16px 24px;
+  position: relative;
+  width: 1030px;
+}
+
+.game-results .team {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  position: relative;
+  width: 462px;
+}
+
+.game-results .div {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 15px;
+  position: relative;
+}
+
+.game-results .frame {
+  background-image: url(./frame-26.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .text-wrapper {
+  color: var(--black);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  position: relative;
+  width: 120px;
+}
+
+.game-results .score {
+  align-items: center;
+  background-color: #5642a91a;
+  border-radius: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 6px 16px;
+  position: relative;
+  width: 64px;
+}
+
+.game-results .text-wrapper-2 {
+  color: #5642a9;
+  flex: 1;
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+}
+
+.game-results .team-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 15px;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.game-results .text-wrapper-3 {
+  color: var(--black);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  position: relative;
+  text-align: right;
+  width: 120px;
+}
+
+.game-results .frame-2 {
+  background-image: url(./frame-27.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .time {
+  align-items: center;
+  background-color: #fa0e0e1a;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 16px;
+  position: relative;
+  width: 103px;
+}
+
+.game-results .text-wrapper-4 {
+  color: #f90d0d;
+  flex: 1;
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  margin-top: -1px;
+  position: relative;
+}
+
+.game-results .status {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 40px;
+  position: relative;
+}
+
+.game-results .text-wrapper-5 {
+  color: var(--dark-gray);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  position: relative;
+  width: 126px;
+}
+
+.game-results .icon {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.game-results .frame-3 {
+  background-image: url(./image.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-4 {
+  background-image: url(./frame-26-2.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-5 {
+  background-image: url(./frame-27-2.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 48px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-6 {
+  background-image: url(./frame-26-3.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .text-wrapper-6 {
+  color: var(--dark-gray);
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  position: relative;
+  width: 125px;
+}
+
+.game-results .frame-7 {
+  background-image: url(./frame-26-4.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-8 {
+  background-image: url(./frame-27-3.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-9 {
+  background-image: url(./frame-27-4.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 48px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.game-results .frame-10 {
+  background-image: url(./frame-26-5.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 32px;
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
