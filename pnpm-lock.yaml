@@ -41,9 +41,6 @@ dependencies:
   react-router-dom:
     specifier: ^6.21.3
     version: 6.21.3(react-dom@18.2.0)(react@18.2.0)
-  react-soccer-lineup:
-    specifier: ^0.4.3
-    version: 0.4.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   sass:
     specifier: ^1.70.0
     version: 1.70.0
@@ -1670,19 +1667,6 @@ packages:
     dependencies:
       '@remix-run/router': 1.14.2
       react: 18.2.0
-    dev: false
-
-  /react-soccer-lineup@0.4.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MwGPJfmJl4IeDXBFi+BN3EXzzqOF3fLbl2er2BOBU0WGx6nYPB9GzKjIct4bt+aiDoQadbfKvZ6V0c/hPdTkzA==}
-    engines: {node: '>=8', npm: '>=5'}
-    peerDependencies:
-      prop-types: ^15.5.4
-      react: ^15.0.0 || ^16.0.0
-      react-dom: ^15.0.0 || ^16.0.0
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
