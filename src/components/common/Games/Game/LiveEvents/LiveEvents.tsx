@@ -14,7 +14,7 @@ type MatchData = {
 type LiveEventsProps = {
   homeTeam: Team;
   awayTeam: Team;
-  matchData: MatchData;
+  matchData: MatchData | null;
   children?: React.ReactNode;
 };
 
@@ -51,10 +51,10 @@ const LiveEvents: FC<LiveEventsProps> = ({
         </div>
         <div className="SSUI-LiveEvents-Header-Data">
           <div className="SSUI-LiveEvents-Header-Data-Score">
-            {matchData.score}
+            {matchData?.score}
           </div>
           <div className="SSUI-LiveEvents-Header-Data-Time">
-            {matchData.time}
+            {matchData?.time}
           </div>
         </div>
         <div className="SSUI-LiveEvents-Header-Away">

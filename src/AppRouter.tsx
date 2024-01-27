@@ -30,7 +30,7 @@ const AppRouter: React.FC = () => {
         <Route path="/clubs/*" element={<Clubs />} />
         <Route path="/club/:id" element={<Club />} />
         <Route path="/games/*" element={<Games />} />
-        <Route path="/game/:id" element={<Game />} />
+        <Route path="/game/:gameId" element={<Game />} />
         <Route path="/competition/:id" element={<Competition />} />
         <Route path="/competitions/*" element={<Competitions />} />
         <Route path="/chat/login" element={<Home socket={socket} />} />

@@ -9,7 +9,7 @@ const fetchAllGames = async () => {
   }
 };
 
-const fetchGamenById = async (id: string) => {
+const fetchGameById = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:3000/api/games/${id}`);
     return response.data;
@@ -29,4 +29,4 @@ const fetchGamesByClub = async (id: string) => {
   }
 };
 
-export { fetchAllGames, fetchGamenById, fetchGamesByClub };
+export { fetchAllGames, fetchGameById, fetchGamesByClub };

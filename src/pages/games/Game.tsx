@@ -1,460 +1,264 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchGameById } from "../../api/games-api";
+import { fetchPlayerById } from "../../api/players-api";
 import { Navbar, Footer } from "../../components/layout";
-import { GameStats } from "../../components/common/Games/Game";
 import {
   LiveEvent,
   LiveEvents,
 } from "../../components/common/Games/Game/LiveEvents";
+import { GameStats } from "../../components/common/Games/Game/GameStats";
 
-import SoccerLineUp from "react-soccer-lineup";
+interface Player {
+  id: number;
+  name: string;
+  tShirtImgUrl: string;
+  tShirtNr: string;
+  faceImgUrl: string;
+  position: string;
+}
+
+interface Team {
+  id: number;
+  name: string;
+  logoUrl: string;
+  playerPositionById: number[][];
+  players: Player[];
+}
+
+interface Match {
+  score: string;
+  time: string;
+}
+
+interface GameEvent {
+  logoUrl: string;
+  time: string;
+  players: Array<{
+    id: number;
+    teamId: number;
+    name: string;
+  }>;
+}
+
+interface GameData {
+  game_lineups: Array<any>;
+  game_events: Array<any>;
+  home_club_id: number;
+  away_club_id: number;
+  home_club_name: string;
+  away_club_name: string;
+  aggregate: string;
+  home_club_goals: number;
+  away_club_goals: number;
+}
+
+interface PlayerNumber {
+  number: number;
+}
+
+interface Squad {
+  gk: PlayerNumber[];
+  df: PlayerNumber[];
+  cam: PlayerNumber[];
+  fw: PlayerNumber[];
+}
 
 function Game() {
-  interface Player {
-    id: number;
-    name: string;
-    tShirtImgUrl: string;
-    tShirtNr: string;
-    faceImgUrl: string;
-  }
+  const [gameData, setGameData] = useState<GameData | null>(null);
+  const [eventsData, setEventsData] = useState<GameEvent[]>([]);
+  const [homeTeam, setHomeTeam] = useState<Team | null>(null);
+  const [awayTeam, setAwayTeam] = useState<Team | null>(null);
+  const [matchData, setMatchData] = useState<Match | null>(null);
+  const { gameId } = useParams<{ gameId: string }>();
 
-  interface Team {
-    id: number;
-    name: string;
-    logoUrl: string;
-    playerPositionById: number[][];
-    players: Player[];
-  }
+  const getEventIconUrl = (
+    description: string,
+    eventType: string
+  ): string | null => {
+    const type = eventType.toLowerCase();
+    const desc = description.toLowerCase();
+    if (type === "substitutions") return "/textures/change2.png";
+    if (type === "cards") {
+      if (desc.includes("yellow card")) return "/textures/yellow-card.png";
+      if (desc.includes("red card")) return "/textures/red-card.png";
+    }
+    if (type === "goals") return "/textures/goal.png";
+    return null;
+  };
 
-  interface PlayerNumber {
-    number: number;
-  }
-
-  interface Squad {
-    cam: PlayerNumber[];
-    df: PlayerNumber[];
-    fw: PlayerNumber[];
-    gk: PlayerNumber;
-  }
-
-  interface TransformedTeam {
-    squad: Squad;
-  }
-
-  const transformTeam = (team: Team): TransformedTeam => {
-    const playerMap = new Map<number, Player>();
-    team.players.forEach((player) => playerMap.set(player.id, player));
-
-    const squad: Squad = {
-      cam: [],
-      df: [],
-      fw: [],
-      gk: { number: 0 },
+  useEffect(() => {
+    const loadData = async () => {
+      console.log(gameId);
+      if (gameId) {
+        const data = await fetchGameById(gameId);
+        if (data) {
+          setGameData(data);
+        }
+      }
     };
 
-    team.playerPositionById.forEach((positionGroup, index) => {
-      positionGroup.forEach((playerId) => {
-        const player = playerMap.get(playerId);
-        if (player) {
-          const playerNumber = parseInt(player.tShirtNr, 10);
-          if (index === 0) squad.gk = { number: playerNumber };
-          else if (index === 1) squad.df.push({ number: playerNumber });
-          else if (index === 2 || index === 3)
-            squad.cam.push({ number: playerNumber });
-          else if (index === 4) squad.fw.push({ number: playerNumber });
-        }
+    loadData();
+  }, [gameId]);
+
+  useEffect(() => {
+    if (gameData) {
+      processGameEvents().then((events) => {
+        setEventsData(events);
       });
-    });
 
-    return { squad };
+      const homeTeamData = transformTeamData(gameData.home_club_id);
+      const awayTeamData = transformTeamData(gameData.away_club_id);
+
+      const score =
+        gameData.aggregate ||
+        `${gameData.home_club_goals}-${gameData.away_club_goals}`;
+      const matchTime = "90";
+
+      setHomeTeam(homeTeamData);
+      setAwayTeam(awayTeamData);
+      setMatchData({
+        score,
+        time: matchTime,
+      });
+    }
+  }, [gameData]);
+
+  // Function to fetch player's name by ID
+  const fetchPlayerName = async (playerId: string): Promise<string> => {
+    try {
+      const playerData = await fetchPlayerById(playerId);
+      return playerData ? playerData.name : "Unknown Player";
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+      return "Unknown Player";
+    }
   };
 
-  const homeTeam = {
-    id: 1,
-    name: "Home Team",
-    logoUrl: "/textures/team1.png",
-    playerPositionById: [[1], [2, 3, 4, 5], [6, 7], [8, 9, 10], [11]],
-    players: [
-      {
-        id: 1,
-        name: "Home Player 1",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "1",
+  const mapPlayers = (lineups: Array<any>, teamId: number): Player[] => {
+    return lineups
+      .filter((player) => player.club_id === teamId)
+      .map((player) => ({
+        id: player.player_id,
+        name: player.player_name,
+        tShirtImgUrl: `/textures/tshirt${player.number % 10}.png`,
+        tShirtNr: player.number,
         faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 2,
-        name: "Home Player 2",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "2",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 3,
-        name: "Home Player 3",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "3",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 4,
-        name: "Home Player 4",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "4",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 5,
-        name: "Home Player 5",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "5",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 6,
-        name: "Home Player 6",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "6",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 7,
-        name: "Home Player 7",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "7",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 8,
-        name: "Home Player 8",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "8",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 9,
-        name: "Home Player 9",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "9",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 10,
-        name: "Home Player 10",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "10",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 11,
-        name: "Home Player 11",
-        tShirtImgUrl: "/textures/tshirt5.png",
-        tShirtNr: "11",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-    ],
+        position: player.position,
+      }));
   };
 
-  const awayTeam = {
-    id: 1,
-    name: "Away Team",
-    logoUrl: "/textures/team2.png",
-    playerPositionById: [[1], [2, 3, 4, 5], [6, 7], [8, 9, 10], [11]],
-    players: [
-      {
-        id: 1,
-        name: "Away Player 1",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "1",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 2,
-        name: "Away Player 2",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "2",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 3,
-        name: "Away Player 3",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "3",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 4,
-        name: "Away Player 4",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "4",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 5,
-        name: "Away Player 5",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "5",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 6,
-        name: "Away Player 6",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "6",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 7,
-        name: "Away Player 7",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "7",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 8,
-        name: "Away Player 8",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "8",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 9,
-        name: "Away Player 9",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "9",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 10,
-        name: "Away Player 10",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "10",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-      {
-        id: 11,
-        name: "Away Player 11",
-        tShirtImgUrl: "/textures/tshirt9.png",
-        tShirtNr: "11",
-        faceImgUrl: "/textures/generic-face.png",
-      },
-    ],
+  // Helper function to categorize player positions
+  const categorizePlayerPosition = (position: string): keyof Squad => {
+    const lowerCasePosition = position.toLowerCase();
+    if (lowerCasePosition.includes("goalkeeper")) return "gk";
+    if (
+      lowerCasePosition.includes("back") ||
+      lowerCasePosition.includes("centre-back")
+    )
+      return "df";
+    if (
+      lowerCasePosition.includes("midfield") ||
+      lowerCasePosition.includes("winger")
+    )
+      return "cam";
+    if (
+      lowerCasePosition.includes("forward") ||
+      lowerCasePosition.includes("striker") ||
+      lowerCasePosition.includes("attack")
+    )
+      return "fw";
+    return "cam"; // default category if none match
   };
 
-  const matchData = {
-    score: "2 - 1",
-    time: "86'",
+  // Adjusted transformTeamData function
+  const transformTeamData = (teamId: number): Team => {
+    if (!gameData)
+      return {
+        id: 0,
+        name: "",
+        logoUrl: "",
+        playerPositionById: [],
+        players: [],
+      };
+
+    const teamLineup = gameData.game_lineups.filter(
+      (player) => player.club_id === teamId
+    );
+    const teamPlayers = mapPlayers(teamLineup, teamId);
+    const teamName =
+      teamId === gameData.home_club_id
+        ? gameData.home_club_name
+        : gameData.away_club_name;
+    const playerPositionById = teamPlayers.map((player) => [
+      parseInt(player.tShirtNr, 10),
+    ]);
+
+    return {
+      id: teamId,
+      name: teamName || "Unknown Team",
+      logoUrl: `/textures/team${teamId === gameData.home_club_id ? 1 : 2}.png`,
+      playerPositionById,
+      players: teamPlayers,
+    };
   };
 
-  const eventsData = [
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "82'",
-      players: [
-        {
-          id: 1,
-          teamId: 1,
-          name: "Home Player 1",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "80'",
-      players: [
-        {
-          id: 7,
-          teamId: 2,
-          name: "Away Player 7",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/goal.png",
-      time: "73'",
-      players: [
-        {
-          id: 2,
-          teamId: 2,
-          name: "Away Player 2",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/change2.png",
-      time: "71'",
-      players: [
-        {
-          id: 1,
-          teamId: 1,
-          name: "Home Player 1",
-        },
-        {
-          id: 2,
-          teamId: 1,
-          name: "Home Player 2",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/goal.png",
-      time: "65'",
-      players: [
-        {
-          id: 3,
-          teamId: 1,
-          name: "Home Player 3",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "61'",
-      players: [
-        {
-          id: 1,
-          teamId: 1,
-          name: "Home Player 1",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/change2.png",
-      time: "55'",
-      players: [
-        {
-          id: 5,
-          teamId: 2,
-          name: "Away Player 5",
-        },
-        {
-          id: 6,
-          teamId: 2,
-          name: "Away Player 6",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/goal.png",
-      time: "53'",
-      players: [
-        {
-          id: 4,
-          teamId: 1,
-          name: "Home Player 4",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "49'",
-      players: [
-        {
-          id: 9,
-          teamId: 1,
-          name: "Home Player 9",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "36'",
-      players: [
-        {
-          id: 5,
-          teamId: 1,
-          name: "Home Player 5",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/red-card.png",
-      time: "31'",
-      players: [
-        {
-          id: 2,
-          teamId: 2,
-          name: "Away Player 2",
-        },
-      ],
-    },
-    {
-      logoUrl: "/textures/yellow-card.png",
-      time: "23'",
-      players: [
-        {
-          id: 2,
-          teamId: 2,
-          name: "Away Player 2",
-        },
-      ],
-    },
-  ];
+  // Process game events into the desired format
+  const processGameEvents = async (): Promise<GameEvent[]> => {
+    if (!gameData) return []; // Check if gameData is null
+    const processedEvents: GameEvent[] = [];
 
-  const gameStats = [
-    {
-      type: "Total Shots",
-      home: "17",
-      away: "12",
-    },
-    {
-      type: "Shots On Target",
-      home: "5",
-      away: "7",
-    },
-    {
-      type: "Pass Accuracy",
-      home: "75%",
-      away: "86%",
-    },
-    {
-      type: "Aerial Won",
-      home: "70%",
-      away: "30%",
-    },
-    {
-      type: "Offsides",
-      home: "2",
-      away: "3",
-    },
-    {
-      type: "Fouls",
-      home: "22",
-      away: "13",
-    },
-    {
-      type: "Corners",
-      home: "3",
-      away: "5",
-    },
-    {
-      type: "Throwns",
-      home: "23",
-      away: "24",
-    },
-    {
-      type: "Dribbles Won",
-      home: "10",
-      away: "17",
-    },
-    {
-      type: "Tackles",
-      home: "36",
-      away: "28",
-    },
-  ];
+    for (const event of gameData.game_events) {
+      const iconUrl = getEventIconUrl(event.description, event.type);
+      if (!iconUrl) continue; // Skip events without a matching icon
 
-  const possesionData = {
-    type: "Possesion",
-    home: "60%",
-    away: "40%",
+      let players = [];
+
+      if (event.type.toLowerCase() === "substitutions") {
+        const playerOutName = event.player_id
+          ? await fetchPlayerName(event.player_id.toString())
+          : "Unknown Player";
+        const playerInName = event.player_in_id
+          ? await fetchPlayerName(event.player_in_id.toString())
+          : "Unknown Player";
+
+        players = [
+          {
+            id: event.player_id,
+            teamId: event.club_id === gameData.home_club_id ? 1 : 2,
+            name: `${playerOutName}`,
+          },
+          {
+            id: event.player_in_id,
+            teamId: event.club_id === gameData.home_club_id ? 1 : 2,
+            name: `${playerInName}`,
+          },
+        ];
+      } else {
+        const playerName = event.player_id
+          ? await fetchPlayerName(event.player_id.toString())
+          : "Unknown Player";
+
+        players.push({
+          id: event.player_id,
+          teamId: event.club_id === gameData.home_club_id ? 1 : 2,
+          name: playerName,
+        });
+      }
+
+      processedEvents.push({
+        logoUrl: iconUrl,
+        time: `${event.minute}'`,
+        players,
+      });
+    }
+
+    return processedEvents;
   };
 
-  const playerClick = (player: any) => {
-    console.log("Player clicked:", player);
-  };
-
-  const homeTeam2 = transformTeam(homeTeam);
-  const awayTeam2 = transformTeam(awayTeam);
+  if (!gameData || !homeTeam || !awayTeam) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -470,24 +274,10 @@ function Game() {
               type={event.players[0].teamId === 1 ? "home" : "away"}
               {...event}
               key={i}
-              onPlayerClick={playerClick}
             />
           ))}
         </LiveEvents>
-        <SoccerLineUp
-          size={"small"}
-          pattern={"lines"}
-          homeTeam={homeTeam2}
-          awayTeam={awayTeam2}
-        />
-        <GameStats
-          homePlayers={homeTeam.players}
-          awayPlayers={awayTeam.players}
-          stats={gameStats}
-          fieldTextureUrl="/textures/soccer-field.svg"
-          possesionData={possesionData}
-          onPlayerClick={playerClick}
-        />
+        <GameStats />
       </div>
       <Footer />
     </div>
