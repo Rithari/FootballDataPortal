@@ -2,15 +2,38 @@ import React from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 export const GameListTable = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const columns = [
+    {
+      name: "gameId",
+      hidden: true,
+    },
     "Home Club",
     "Away Club",
     "Score",
     "Date",
     "Stadium",
     "Attendance",
+    {
+      name: "Actions",
+      formatter: (cell: number, row: any) =>
+        _(
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault(); // Prevent the default anchor action
+              navigate(`/game/${row.cells[0].data}`);
+            }}
+            className="view-link"
+          >
+            View
+          </a>
+        ),
+    },
   ];
 
   return (
@@ -19,15 +42,16 @@ export const GameListTable = (): JSX.Element => {
         server={{
           url: "http://localhost:3000/api/games",
           then: (response: any) => {
-            // Check that response.data is present and is an array
             if (response && Array.isArray(response.data)) {
               return response.data.map((game: any) => [
+                game.game_id,
                 game.home_club_name,
                 game.away_club_name,
                 `${game.home_club_goals} - ${game.away_club_goals}`,
                 new Date(game.date).toLocaleDateString(),
                 game.stadium,
                 game.attendance,
+                null, // Placeholder for the 'View' button
               ]);
             }
             throw new Error("Data is not in expected format or not found");

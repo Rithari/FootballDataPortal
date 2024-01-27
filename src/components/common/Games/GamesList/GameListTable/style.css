@@ -1,3 +1,22 @@
+.view-button {
+  cursor: pointer; /* Indicates it's clickable */
+  font-family: var(--text-small-normal-font-family);
+  font-size: var(--text-small-normal-font-size);
+  font-style: var(--text-small-normal-font-style);
+  font-weight: var(--text-small-normal-font-weight);
+  letter-spacing: var(--text-small-normal-letter-spacing);
+  line-height: var(--text-small-normal-line-height);
+  text-decoration: underline; /* Underline to make it look like a hyperlink */
+  background: none; /* No background */
+  border: none; /* No border */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Adjust margin as needed */
+}
+
+.view-button:hover {
+  text-decoration: none; /* Optionally change the style on hover */
+}
+
 .gridjs-container {
   width: 80%; /* This sets the max width you want for the table, you can adjust as needed */
   margin: 0 auto; /* This centers the table */
