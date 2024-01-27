@@ -1,2 +1,2 @@
 export { GameStats } from "./GameStats";
-export { GameScore } from "./GameScore";
+export { LiveEvents, LiveEvent } from "./LiveEvents";
