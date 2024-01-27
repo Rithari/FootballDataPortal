@@ -18,13 +18,15 @@ $expandButtonColor: black;
 
 .SSUI-LiveEvent {
     width: 100%;
-    display: block;
     display: flex;
     flex-flow: row;
     box-sizing: border-box;
     border-bottom: $eventBottomBorder;
     background-color: $eventBackgroundColor;
     padding: 4px;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
+    color: var(--textColor);
 }
 
 .SSUI-LiveEvent:nth-of-type(2n) {
@@ -35,15 +37,15 @@ $expandButtonColor: black;
     background-color: $eventBackgroundColorOdd;
 }
 
-.SSUI-LiveEvent-Home {
+.SSUI-LiveEvent-Home,
+.SSUI-LiveEvent-Away {
     width: 40%;
     flex-grow: 1;
-    display: block;
-    margin: 0;
-    text-align: center;
     display: flex;
     flex-flow: column;
     justify-content: center;
+    margin: 0;
+    text-align: center;
 }
 
 .SSUI-LiveEvent-Logo {
@@ -78,17 +80,9 @@ $expandButtonColor: black;
         align-self: center;
         min-width: 1.5em;
         text-align: center;
+        font-family: var(--text-regular-normal-font-family);
+        font-size: var(--text-regular-normal-font-size);
     }
-}
-
-.SSUI-LiveEvent-Away {
-    width: 40%;
-    flex-grow: 1;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    margin: 0;
-    text-align: center;
 }
 
 .SSUI-LiveEvent-Text {
@@ -96,6 +90,8 @@ $expandButtonColor: black;
     display: block;
     margin: 0;
     text-align: center;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
 }
 
 .SSUI-LiveEvent-Text-Button {
@@ -105,6 +101,8 @@ $expandButtonColor: black;
     cursor: pointer;
     padding: 0;
     color: $playerNameColor;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
 }
 
 .SSUI-LiveEvent-Text-Button:hover {
@@ -116,6 +114,8 @@ $expandButtonColor: black;
     width: 40%;
     box-sizing: border-box;
     padding-bottom: 30px;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
 }
 
 .SSUI-LiveEvents-Header {
@@ -129,7 +129,8 @@ $expandButtonColor: black;
     box-shadow: $headerShadow;
 }
 
-.SSUI-LiveEvents-Header-Home {
+.SSUI-LiveEvents-Header-Home,
+.SSUI-LiveEvents-Header-Away {
     width: 40%;
     margin: 0;
     flex-grow: 1;
@@ -160,16 +161,6 @@ $expandButtonColor: black;
     font-size: 1.25em;
 }
 
-.SSUI-LiveEvents-Header-Away {
-    width: 40%;
-    margin: 0;
-    flex-grow: 1;
-    text-align: center;
-    display: flex;
-    flex-flow: column;
-    color: $teamNameColor;
-}
-
 .SSUI-LiveEvents-Header-Logo {
     width: 4em;
     height: auto;
@@ -185,6 +176,7 @@ $expandButtonColor: black;
 .SSUI-LiveEvents-Header-Text {
     margin: 0;
     font-weight: bold;
+    color: var(--black);
 }
 
 .SSUI-LiveEvents-List {
