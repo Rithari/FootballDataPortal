@@ -58,6 +58,7 @@ export const CompetitionClubsTable = (): JSX.Element => {
 
   return (
     <div className="gridjs-container">
+      <h2 className="table-heading">Clubs</h2>
       <Grid
         data={fetchData}
         columns={columns}

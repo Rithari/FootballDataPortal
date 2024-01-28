@@ -40,6 +40,7 @@ export const ClubGamesTable = (): JSX.Element => {
 
   return (
     <div className="gridjs-container">
+      <h2 className="table-heading">Club Games</h2>
       <Grid
         server={{
           url: "http://localhost:3000/api/games/club/" + clubId,

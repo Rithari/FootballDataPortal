@@ -1,3 +1,13 @@
+.table-heading {
+  font-family: var(--heading-h2-font-family);
+  font-size: var(--heading-h2-font-size);
+  font-style: normal;
+  font-weight: var(--heading-h2-font-weight);
+  color: var(--black);
+  margin: 0 0 20px 0; /* Adds margin below the heading */
+  text-align: center; /* Center the heading, adjust as needed */
+}
+
 .loading-text {
   /*align-self: stretch;*/
   color: var(--black);
@@ -12,6 +22,7 @@
 .gridjs-container {
   width: 80%; /* This sets the max width you want for the table, you can adjust as needed */
   margin: 0 auto; /* This centers the table */
+  margin-bottom: 15px; /* Adds margin below the table */
 }
 
 .gridjs-table {
