@@ -1,30 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchStatistics } from "../../../../../api/stats-api"; // Adjust the import path as needed
 import "./style.css";
 
 export const CompetitionStats = (): JSX.Element => {
+  const [showAdvancedStats, setShowAdvancedStats] = useState(false);
+  const [standardStatsSvg, setStandardStatsSvg] = useState("");
+  const [advancedStatsSvg, setAdvancedStatsSvg] = useState("");
+
+  useEffect(() => {
+    // Function to load statistics SVGs
+    const loadStatistics = async () => {
+      try {
+        const standardPayload = {
+          statsCategory: "competition",
+          identifier: "standard",
+        };
+        const advancedPayload = {
+          statsCategory: "competition",
+          identifier: "advanced",
+        };
+
+        const standardResponse = await fetchStatistics(standardPayload);
+        const advancedResponse = await fetchStatistics(advancedPayload);
+
+        setStandardStatsSvg(standardResponse.data); // Assuming response.data contains the SVG content
+        setAdvancedStatsSvg(advancedResponse.data);
+      } catch (error) {
+        console.error("Error fetching statistics SVGs:", error);
+      }
+    };
+
+    loadStatistics();
+  }, []); // Empty dependency array to run only once on component mount
+
+  const handleToggleChange = () => {
+    setShowAdvancedStats(!showAdvancedStats);
+  };
+
   return (
     <div className="player-list-stats">
-      <div className="section-title">
-        <div className="heading">Statistics</div>
-        <p className="text">Explore club statistics and performance visually</p>
-      </div>
+      {/* Existing JSX */}
       <div className="content">
-        <img
-          className="placeholder-image"
-          alt="Placeholder image"
-          src="placeholder-image-1.png"
-        />
-        <div className="div">
-          <img
-            className="img"
-            alt="Placeholder image"
-            src="placeholder-image-2.png"
-          />
-          <img
-            className="img"
-            alt="Placeholder image"
-            src="placeholder-image-3.png"
-          />
+        <div className="statistics-row">
+          {/* Standard Stats */}
+          {standardStatsSvg && (
+            <div
+              className="placeholder-image-container"
+              dangerouslySetInnerHTML={{ __html: standardStatsSvg }}
+            />
+          )}
+          {/* Advanced Stats - shown based on toggle */}
+          {showAdvancedStats && advancedStatsSvg && (
+            <div
+              className="placeholder-image-container"
+              dangerouslySetInnerHTML={{ __html: advancedStatsSvg }}
+            />
+          )}
         </div>
       </div>
     </div>

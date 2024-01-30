@@ -18,7 +18,6 @@ export const ClubPlayersTable = (): JSX.Element => {
           player.name,
           player.position,
           player.age,
-          player.currentClubName,
           player.marketValueInEur ? `${player.marketValueInEur}` : "N/A",
         ]);
         resolve(transformedData);
@@ -57,23 +56,6 @@ export const ClubPlayersTable = (): JSX.Element => {
     },
     "Position",
     "Age",
-    {
-      name: "Club",
-      formatter: (cell: string, row: any) => {
-        const clubId = row.cells[1].data;
-        return _(
-          <a
-            href={`/club/${clubId}`}
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`/club/${clubId}`);
-            }}
-          >
-            {cell}
-          </a>
-        );
-      },
-    },
     {
       name: "Market Value",
       formatter: (cell: string) => {
