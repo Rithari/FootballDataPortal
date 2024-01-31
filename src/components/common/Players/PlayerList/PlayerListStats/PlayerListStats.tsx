@@ -17,7 +17,6 @@ const PlayerListStats: React.FC = () => {
     fetchStatistics("allPlayers")
       .then((result) => {
         if (result instanceof Blob) {
-          // Handle Blob (ZIP file)
           const reader = new FileReader();
           reader.onload = function () {
             const arrayBuffer = this.result;
@@ -29,17 +28,18 @@ const PlayerListStats: React.FC = () => {
                   async (relativePath) => {
                     const zipEntry = content.files[relativePath];
                     if (zipEntry.name.endsWith(".svg")) {
-                      const blob = await zipEntry.async("blob");
-                      const url = URL.createObjectURL(
-                        new Blob([blob], { type: "image/svg+xml" })
+                      const text = await zipEntry.async("text"); // Read as text to inspect SVG content
+                      const isAdvanced = text.includes(
+                        'data-statistic-type="advanced"'
                       );
-                      return { url, isAdvanced: false }; // Modify as needed for 'isAdvanced'
+                      const blob = new Blob([text], { type: "image/svg+xml" });
+                      const url = URL.createObjectURL(blob);
+                      return { url, isAdvanced };
                     }
                     return null;
                   }
                 );
 
-                // Resolve all promises and filter out null values
                 return Promise.all(svgPromises).then((results) =>
                   results.filter((item): item is SvgData => item !== null)
                 );
@@ -59,7 +59,7 @@ const PlayerListStats: React.FC = () => {
           };
           reader.readAsArrayBuffer(result);
         } else {
-          // Handle string[] (URLs of SVGs)
+          // For direct SVG URLs (this logic might need adjustment)
           const svgData = result.map((url) => ({
             url,
             isAdvanced: false,
