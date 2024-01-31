@@ -1,39 +1,48 @@
 import axios from "axios";
+import JSZip from "jszip";
 
-// fetchStatistics. Payload is an object with the following properties:
-// statsCategory: "allPlayers", "allClubs", "player", "club", "competition", "game".
-// identifier(optional): playerID, clubID, competitionID, gameID.
+const fetchStatistics = async (statsCategory: string, identifier?: string) => {
+  const expressServerUrl = "http://localhost:3000/api/stats";
 
-const fetchStatistics = async (payload: any) => {
-  // Validate payload
-  if (!payload.statsCategory) {
-    throw new Error("statsCategory is required");
+  const response = await axios.post(
+    expressServerUrl,
+    {
+      stats_category: statsCategory,
+      identifier,
+    },
+    {
+      responseType: "blob", // Expect a blob response
+    }
+  );
+
+  // Check content type from headers
+  const contentType = response.headers["content-type"];
+
+  // Handle ZIP files
+  if (contentType === "application/zip") {
+    const zip = new JSZip();
+    const zipData = await zip.loadAsync(response.data);
+    const svgFiles = [];
+
+    for (const filePath of Object.keys(zipData.files)) {
+      if (filePath.endsWith(".svg")) {
+        const fileData = await zipData.files[filePath].async("blob");
+        const blob = new Blob([fileData], { type: "image/svg+xml" });
+        const url = URL.createObjectURL(blob);
+        svgFiles.push(url);
+      }
+    }
+    return svgFiles;
   }
 
-  if (
-    payload.statsCategory !== "allPlayers" &&
-    payload.statsCategory !== "allClubs" &&
-    payload.statsCategory !== "player" &&
-    payload.statsCategory !== "club" &&
-    payload.statsCategory !== "competition" &&
-    payload.statsCategory !== "game"
-  ) {
-    throw new Error("statsCategory is invalid");
+  // Handle single SVG file
+  else if (contentType === "image/svg+xml") {
+    const blob = new Blob([response.data], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    return [url];
   }
 
-  try {
-    // Updated to make a GET request with query parameters
-    const response = await axios.get(`http://localhost:3000/api/stats`, {
-      params: {
-        statsCategory: payload.statsCategory,
-        identifier: payload.identifier, // This can be undefined, which is fine
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching statistics:", error);
-    throw error; // Rethrowing the error to be handled by the caller
-  }
+  throw new Error(`Unsupported content type: ${contentType}`);
 };
 
 export { fetchStatistics };
