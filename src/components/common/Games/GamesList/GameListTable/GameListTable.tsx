@@ -4,6 +4,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 
 export const GameListTable = (): JSX.Element => {
+  const apiURL = import.meta.env.REACT_APP_API_URL || "http://localhost:3000";
   const navigate = useNavigate();
 
   const columns = [
@@ -39,7 +40,7 @@ export const GameListTable = (): JSX.Element => {
     <div className="gridjs-container">
       <Grid
         server={{
-          url: "http://localhost:3000/api/games",
+          url: `${apiURL}/api/games`,
           then: (response: any) => {
             if (response && Array.isArray(response.data)) {
               return response.data.map((game: any) => [

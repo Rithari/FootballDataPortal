@@ -15,7 +15,9 @@ import Competition from "./pages/competitions/Competition";
 import ChatPage from "./components/chat/chat_components/ChatPage";
 import Home from "./components/chat/chat_components/Home";
 
-const socket = socketIO("http://localhost:3000");
+const socket = socketIO(
+  import.meta.env.REACT_APP_SOCKET_URL || "http://localhost:3000"
+);
 
 const AppRouter: React.FC = () => {
   return (
@@ -24,7 +26,6 @@ const AppRouter: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about/*" element={<AboutUs />} />
         <Route path="/contact/*" element={<ContactUs />} />
-        {/*<Route path="/news/*" element={<News />} />*/}
         <Route path="/players/*" element={<Players />} />
         <Route path="/player/:id" element={<Player />} />
         <Route path="/clubs/*" element={<Clubs />} />

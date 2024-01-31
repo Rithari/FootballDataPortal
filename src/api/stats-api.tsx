@@ -1,11 +1,11 @@
 import axios from "axios";
 import JSZip from "jszip";
 
-const fetchStatistics = async (statsCategory: string, identifier?: string) => {
-  const expressServerUrl = "http://localhost:3000/api/stats";
+const apiURL = import.meta.env.REACT_APP_API_URL || "http://localhost:3000";
 
+const fetchStatistics = async (statsCategory: string, identifier?: string) => {
   const response = await axios.post(
-    expressServerUrl,
+    `${apiURL}/api/statistics`,
     {
       stats_category: statsCategory,
       identifier,

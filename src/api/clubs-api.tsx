@@ -1,8 +1,11 @@
 import axios from "axios";
 
+// Express API URL
+const apiURL = import.meta.env.REACT_APP_API_URL || "http://localhost:3000";
+
 const fetchAllClubs = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/clubs");
+    const response = await axios.get(`${apiURL}/api/clubs`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -11,7 +14,7 @@ const fetchAllClubs = async () => {
 
 const fetchClubById = async (id: string) => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/clubs/${id}`);
+    const response = await axios.get(`${apiURL}/api/clubs/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -20,9 +23,7 @@ const fetchClubById = async (id: string) => {
 
 const fetchClubsByCompetition = async (id: string) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/api/clubs/competition/${id}`
-    );
+    const response = await axios.get(`${apiURL}/api/clubs/competition/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -31,9 +32,7 @@ const fetchClubsByCompetition = async (id: string) => {
 
 const fetchClubPlayers = async (id: string) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/api/clubs/${id}/players`
-    );
+    const response = await axios.get(`${apiURL}/api/clubs/${id}/players`);
     return response.data;
   } catch (error) {
     console.log(error);
