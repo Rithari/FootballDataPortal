@@ -5,7 +5,7 @@ const apiURL = import.meta.env.REACT_APP_API_URL || "http://localhost:3000";
 
 const fetchStatistics = async (statsCategory: string, identifier?: string) => {
   const response = await axios.post(
-    `${apiURL}/api/statistics`,
+    `${apiURL}/api/stats`,
     {
       stats_category: statsCategory,
       identifier,
