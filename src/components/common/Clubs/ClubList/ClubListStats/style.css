@@ -47,13 +47,17 @@
 }
 
 .player-list-stats .content {
-  align-items: flex-start;
-  align-self: stretch;
   display: flex;
-  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* Adjusts the spacing between items */
+  align-items: flex-start;
   gap: 32px;
-  position: relative;
-  width: 100%;
+}
+
+.player-list-stats .svg-image {
+  max-width: 100%; /* Ensures SVG doesn't exceed its container */
+  height: auto; /* Keeps aspect ratio of the SVG */
+  margin-bottom: 32px; /* Space between rows */
 }
 
 .player-list-stats .placeholder-image {
