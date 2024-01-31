@@ -1,1 +1,1 @@
-export { CompetitionStats } from "./CompetitionStats";
+export { default as CompetitionStats } from "./CompetitionStats";

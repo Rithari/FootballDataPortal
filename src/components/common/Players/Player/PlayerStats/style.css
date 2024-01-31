@@ -1,4 +1,4 @@
-.player-stats {
+.player-list-stats {
   align-items: center;
   background-color: var(--white);
   display: flex;
@@ -9,7 +9,7 @@
   width: 1440px;
 }
 
-.player-stats .content {
+.player-list-stats .section-title {
   align-items: center;
   display: flex;
   flex: 0 0 auto;
@@ -19,30 +19,22 @@
   width: 768px;
 }
 
-.player-stats .div {
-  align-items: center;
-  display: inline-flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-}
-
-.player-stats .heading {
+.player-list-stats .heading {
+  align-self: stretch;
   color: var(--black);
-  font-family: var(--heading-h1-font-family);
-  font-size: var(--heading-h1-font-size);
-  font-style: var(--heading-h1-font-style);
-  font-weight: var(--heading-h1-font-weight);
-  letter-spacing: var(--heading-h1-letter-spacing);
-  line-height: var(--heading-h1-line-height);
+  font-family: var(--heading-h2-font-family);
+  font-size: var(--heading-h2-font-size);
+  font-style: var(--heading-h2-font-style);
+  font-weight: var(--heading-h2-font-weight);
+  letter-spacing: var(--heading-h2-letter-spacing);
+  line-height: var(--heading-h2-line-height);
   margin-top: -1px;
   position: relative;
   text-align: center;
-  width: 768px;
 }
 
-.player-stats .text {
+.player-list-stats .text {
+  align-self: stretch;
   color: var(--black);
   font-family: var(--text-medium-normal-font-family);
   font-size: var(--text-medium-normal-font-size);
@@ -52,12 +44,44 @@
   line-height: var(--text-medium-normal-line-height);
   position: relative;
   text-align: center;
-  width: 768px;
 }
 
-.player-stats .placeholder-image {
+.player-list-stats .content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* Adjusts the spacing between items */
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.player-list-stats .svg-image {
+  max-width: 100%; /* Ensures SVG doesn't exceed its container */
+  height: auto; /* Keeps aspect ratio of the SVG */
+  margin-bottom: 32px; /* Space between rows */
+}
+
+.player-list-stats .placeholder-image {
   align-self: stretch;
-  height: 738px;
+  flex: 1;
+  flex-grow: 1;
+  object-fit: cover;
+  position: relative;
+}
+
+.player-list-stats .div {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 32px;
+  position: relative;
+}
+
+.player-list-stats .img {
+  align-self: stretch;
+  flex: 1;
+  flex-grow: 1;
   object-fit: cover;
   position: relative;
   width: 100%;
