@@ -15,34 +15,60 @@ const PlayerListStats: React.FC = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchStatistics("allPlayers")
-      .then(async (response: any) => {
-        const zip = new JSZip();
-        const content = await zip.loadAsync(response.data);
-        const svgPromises = Object.keys(content.files).map(
-          async (relativePath) => {
-            const zipEntry = content.files[relativePath];
-            if (zipEntry.name.endsWith(".svg")) {
-              const blob = await zipEntry.async("blob");
-              const text = await new Response(blob).text(); // Convert the blob to text to inspect the SVG content
-              const isAdvanced = text.includes(
-                'data-statistic-type="advanced"'
-              ); // Check if the SVG content contains the advanced tag
-              const url = URL.createObjectURL(blob);
-              return { url, isAdvanced } as SvgData;
-            }
-            return null;
-          }
-        );
+      .then((result) => {
+        if (result instanceof Blob) {
+          // Handle Blob (ZIP file)
+          const reader = new FileReader();
+          reader.onload = function () {
+            const arrayBuffer = this.result;
+            const zip = new JSZip();
+            zip
+              .loadAsync(arrayBuffer)
+              .then((content) => {
+                const svgPromises = Object.keys(content.files).map(
+                  async (relativePath) => {
+                    const zipEntry = content.files[relativePath];
+                    if (zipEntry.name.endsWith(".svg")) {
+                      const blob = await zipEntry.async("blob");
+                      const url = URL.createObjectURL(
+                        new Blob([blob], { type: "image/svg+xml" })
+                      );
+                      return { url, isAdvanced: false }; // Modify as needed for 'isAdvanced'
+                    }
+                    return null;
+                  }
+                );
 
-        // Resolve all promises and filter out any null values from non-svg files
-        const svgDataResults = await Promise.all(svgPromises);
-        const filteredSvgData = svgDataResults.filter(
-          (item): item is SvgData => item !== null
-        );
-        setSvgData(filteredSvgData);
-        setIsLoading(false);
+                // Resolve all promises and filter out null values
+                return Promise.all(svgPromises).then((results) =>
+                  results.filter((item): item is SvgData => item !== null)
+                );
+              })
+              .then((filteredSvgData) => {
+                setSvgData(filteredSvgData);
+                setIsLoading(false);
+              })
+              .catch((error) => {
+                console.error("Error processing ZIP file:", error);
+                setIsLoading(false);
+              });
+          };
+          reader.onerror = function (error) {
+            console.error("Error reading blob:", error);
+            setIsLoading(false);
+          };
+          reader.readAsArrayBuffer(result);
+        } else {
+          // Handle string[] (URLs of SVGs)
+          const svgData = result.map((url) => ({
+            url,
+            isAdvanced: false,
+          })) as SvgData[];
+          setSvgData(svgData);
+          setIsLoading(false);
+        }
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Error fetching SVGs:", error);
         setIsLoading(false);
       });
@@ -76,16 +102,12 @@ const PlayerListStats: React.FC = () => {
         ) : svgData.length > 0 ? (
           svgData.map((data, index) =>
             (data.isAdvanced && showAdvanced) || !data.isAdvanced ? (
-              <object
+              <img
                 key={index}
-                data={data.url}
-                type="image/svg+xml"
-                className={`svg-image ${data.isAdvanced ? "advanced" : ""}`}
-                aria-label={`Statistic ${index}`}
-              >
-                {/* Fallback content if SVGs are not supported or fail to load */}
-                <img src="fallback-image.png" alt={`Statistic ${index}`} />
-              </object>
+                src={data.url}
+                alt={`Statistic ${index}`}
+                className={data.isAdvanced ? "advanced" : ""}
+              />
             ) : null
           )
         ) : (
