@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ChatPageProps, ChatUser } from "./ChatTypes";
 
 const ChatBar = ({ socket }: ChatPageProps) => {

@@ -1,1 +1,1 @@
-export { PlayerListStats } from "./PlayerListStats";
+export { default as PlayerListStats } from "./PlayerListStats";

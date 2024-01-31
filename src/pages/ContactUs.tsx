@@ -1,4 +1,3 @@
-import React from "react";
 import { Navbar, Footer } from "../components/layout";
 import { ContactUsHeader, ContactForm } from "../components/common/ContactUs";
 import "../assets/styles/style.css";

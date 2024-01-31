@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchClubById } from "../../../../../api/clubs-api"; // Adjust the import path as needed
 import "./style.css";

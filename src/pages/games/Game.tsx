@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchGameById } from "../../api/games-api";
 import { fetchPlayerById } from "../../api/players-api";
@@ -51,17 +51,6 @@ interface GameData {
   aggregate: string;
   home_club_goals: number;
   away_club_goals: number;
-}
-
-interface PlayerNumber {
-  number: number;
-}
-
-interface Squad {
-  gk: PlayerNumber[];
-  df: PlayerNumber[];
-  cam: PlayerNumber[];
-  fw: PlayerNumber[];
 }
 
 function Game() {
@@ -146,29 +135,6 @@ function Game() {
         faceImgUrl: "/textures/generic-face.png",
         position: player.position,
       }));
-  };
-
-  // Helper function to categorize player positions
-  const categorizePlayerPosition = (position: string): keyof Squad => {
-    const lowerCasePosition = position.toLowerCase();
-    if (lowerCasePosition.includes("goalkeeper")) return "gk";
-    if (
-      lowerCasePosition.includes("back") ||
-      lowerCasePosition.includes("centre-back")
-    )
-      return "df";
-    if (
-      lowerCasePosition.includes("midfield") ||
-      lowerCasePosition.includes("winger")
-    )
-      return "cam";
-    if (
-      lowerCasePosition.includes("forward") ||
-      lowerCasePosition.includes("striker") ||
-      lowerCasePosition.includes("attack")
-    )
-      return "fw";
-    return "cam"; // default category if none match
   };
 
   // Adjusted transformTeamData function

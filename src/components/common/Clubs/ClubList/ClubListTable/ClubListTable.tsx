@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import { fetchAllClubs } from "../../../../../api/clubs-api";

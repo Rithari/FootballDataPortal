@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, _ } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 import "./style.css";
@@ -20,7 +19,7 @@ export const ClubGamesTable = (): JSX.Element => {
     "Attendance",
     {
       name: "Actions",
-      formatter: (cell: number, row: any) =>
+      formatter: (_cell: number, row: any) =>
         _(
           <a
             href="#"

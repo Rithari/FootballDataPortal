@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ChatMessage, ChatPageProps } from "./ChatTypes";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";

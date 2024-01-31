@@ -1,9 +1,7 @@
-import React from "react";
 import { Navbar, Footer } from "../components/layout";
 import {
   HomepageHeader,
   LiveChatCTA,
-  LatestNewsCard,
   NewsletterCTA,
 } from "../components/common/HomePage";
 import "../assets/styles/style.css";
