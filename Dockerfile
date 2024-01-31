@@ -1,8 +1,9 @@
 FROM node:20.11.0-alpine3.19 as build
 
 WORKDIR /app
-COPY package.json ./
-RUN npm install
+COPY pnpm-lock.yaml package.json ./
+RUN npm install -g pnpm
+RUN pnpm install
 COPY . ./
 RUN npm run build
 
