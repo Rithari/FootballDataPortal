@@ -20,6 +20,7 @@ const ChatFooter = ({ socket }: ChatPageProps) => {
   };
   return (
     <div className="chat__footer">
+      <hr />
       <form className="form" onSubmit={handleSendMessage}>
         <input
           type="text"

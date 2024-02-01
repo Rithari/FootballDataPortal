@@ -16,7 +16,7 @@
   flex-direction: column;
   gap: 24px;
   position: relative;
-  width: 768px;
+  width: 850px;
 }
 
 .player-list-stats .heading {
@@ -54,10 +54,20 @@
   gap: 32px;
 }
 
-.player-list-stats .svg-image {
+.player-list-stats .svg-content {
   max-width: 100%; /* Ensures SVG doesn't exceed its container */
   height: auto; /* Keeps aspect ratio of the SVG */
   margin-bottom: 32px; /* Space between rows */
+  position: relative;
+  align-content: center;
+}
+
+.player-list-stats .svg-content img {
+  width: 90%;
+  height: auto;
+  margin-bottom: 32px;
+  position: relative;
+  align-self: center;
 }
 
 .player-list-stats .placeholder-image {

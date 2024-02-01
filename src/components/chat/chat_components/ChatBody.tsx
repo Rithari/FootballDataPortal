@@ -17,11 +17,13 @@ const ChatBody = ({
   return (
     <>
       <header className="chat__mainHeader">
-        <p>Football Enthusiasts ⚽️🔥</p>
+        <span className="Enthusiast">Football Enthusiasts</span>
+        <p>The perfect place to chat with other football lovers.</p>
         <button className="leaveChat__btn" onClick={handleLeaveChat}>
           LEAVE CHAT
         </button>
       </header>
+      <hr />
 
       <div className="message__container">
         {messages.map((message) =>
