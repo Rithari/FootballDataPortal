@@ -61,6 +61,7 @@ function Game() {
   const [matchData, setMatchData] = useState<Match | null>(null);
   const { gameId } = useParams<{ gameId: string }>();
 
+  // Helper function to get the event icon URL based on event description and type
   const getEventIconUrl = (
     description: string,
     eventType: string
@@ -76,6 +77,7 @@ function Game() {
     return null;
   };
 
+  // Load game data when the gameId changes
   useEffect(() => {
     const loadData = async () => {
       console.log(gameId);
@@ -90,6 +92,7 @@ function Game() {
     loadData();
   }, [gameId]);
 
+  // Process game data when gameData is available
   useEffect(() => {
     if (gameData) {
       processGameEvents().then((events) => {
@@ -124,6 +127,7 @@ function Game() {
     }
   };
 
+  // Map players from game lineups
   const mapPlayers = (lineups: Array<any>, teamId: number): Player[] => {
     return lineups
       .filter((player) => player.club_id === teamId)
@@ -137,7 +141,7 @@ function Game() {
       }));
   };
 
-  // Adjusted transformTeamData function
+  // Transform team data based on teamId
   const transformTeamData = (teamId: number): Team => {
     if (!gameData)
       return {
@@ -171,7 +175,7 @@ function Game() {
 
   // Process game events into the desired format
   const processGameEvents = async (): Promise<GameEvent[]> => {
-    if (!gameData) return []; // Check if gameData is null
+    if (!gameData) return [];
     const processedEvents: GameEvent[] = [];
 
     for (const event of gameData.game_events) {
@@ -222,6 +226,7 @@ function Game() {
     return processedEvents;
   };
 
+  // Render loading message if data is not available
   if (!gameData || !homeTeam || !awayTeam) {
     return <div>Loading...</div>;
   }
