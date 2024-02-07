@@ -17,7 +17,7 @@ const PlayerStats: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchStatistics("competition", id)
+    fetchStatistics("player", id)
       .then((result) => {
         if (result instanceof Blob) {
           const reader = new FileReader();
