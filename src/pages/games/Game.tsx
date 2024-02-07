@@ -105,7 +105,7 @@ function Game() {
       const score =
         gameData.aggregate ||
         `${gameData.home_club_goals}-${gameData.away_club_goals}`;
-      const matchTime = "90";
+      const matchTime = "90'";
 
       setHomeTeam(homeTeamData);
       setAwayTeam(awayTeamData);
