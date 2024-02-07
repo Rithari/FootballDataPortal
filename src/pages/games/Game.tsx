@@ -164,10 +164,14 @@ function Game() {
       parseInt(player.tShirtNr, 10),
     ]);
 
+    // Dynamically generate the logo URL using the teamId
+    const logoUrl = `https://tmssl.akamaized.net/images/wappen/head/${teamId}.png`;
+
     return {
       id: teamId,
       name: teamName || "Unknown Team",
-      logoUrl: `/textures/team${teamId === gameData.home_club_id ? 1 : 2}.png`,
+      // Placeholder -> logoUrl: `/textures/team${teamId === gameData.home_club_id ? 1 : 2}.png`,
+      logoUrl,
       playerPositionById,
       players: teamPlayers,
     };
