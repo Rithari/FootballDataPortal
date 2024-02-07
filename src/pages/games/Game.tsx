@@ -178,6 +178,9 @@ function Game() {
     if (!gameData) return [];
     const processedEvents: GameEvent[] = [];
 
+    // Sort game events by minute in ascending order
+    gameData.game_events.sort((a, b) => a.minute - b.minute);
+
     for (const event of gameData.game_events) {
       const iconUrl = getEventIconUrl(event.description, event.type);
       if (!iconUrl) continue; // Skip events without a matching icon
