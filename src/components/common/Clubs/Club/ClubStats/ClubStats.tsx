@@ -97,7 +97,7 @@ const ClubStats: React.FC = () => {
       </div>
       <div className="svg-content">
         {isLoading ? (
-          <p>Loading visualizations...</p>
+          <p>Loading visualizations... (this might take up to 2 minutes)</p>
         ) : svgData.length > 0 ? (
           svgData.map((data, index) =>
             (data.isAdvanced && showAdvanced) || !data.isAdvanced ? (
