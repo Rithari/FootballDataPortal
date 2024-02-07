@@ -35,8 +35,6 @@ export const ClubGamesTable = (): JSX.Element => {
     },
   ];
 
-  console.log("clubId", clubId);
-
   return (
     <div className="gridjs-container">
       <h2 className="table-heading">Club Games</h2>

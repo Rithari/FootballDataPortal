@@ -13,11 +13,11 @@ const GameStats: React.FC = () => {
   const [svgData, setSvgData] = useState<SvgData[]>([]);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useParams<{ id: string }>();
+  const { gameId } = useParams<{ gameId: string }>();
 
   useEffect(() => {
     setIsLoading(true);
-    fetchStatistics("game", id)
+    fetchStatistics("game", gameId)
       .then((result) => {
         if (result instanceof Blob) {
           const reader = new FileReader();
