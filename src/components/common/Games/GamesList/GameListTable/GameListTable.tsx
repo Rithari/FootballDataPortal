@@ -53,16 +53,6 @@ export const GameListTable = (): JSX.Element => {
     if (sort && sort.length > 0) {
       const col = sort[1];
       const dir = col.direction === 1 ? "asc" : "desc";
-      console.log(col);
-      const columnNames = [
-        null,
-        "home_club_name",
-        "away_club_name",
-        "score",
-        "date",
-        "stadium",
-        "attendance",
-      ];
       const colName = "home_club_name";
       url.searchParams.set("sort", `${colName},${dir}`);
     }
